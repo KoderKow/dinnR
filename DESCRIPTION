@@ -1,0 +1,13 @@
+Package: dinnR
+Title: What's for Dinner?
+Version: 0.0.0.9000
+Authors@R: person('Kyle', 'Harris', email = 'koderkow@gmail.com', role = c('cre', 'aut'))
+Description: Summarize what ingrediants you will need for the weekto cook the food.
+License: MIT + file LICENSE
+Imports: 
+    config,
+    golem,
+    shiny
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
