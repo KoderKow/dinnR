@@ -19,7 +19,7 @@ usethis::use_package( "thinkr" )
 
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module( name = "name_of_module1" ) # Name of the module
+golem::add_module( name = "recipe_input" ) # Name of the module
 golem::add_module( name = "name_of_module2" ) # Name of the module
 
 ## Add helper functions ----
@@ -35,7 +35,7 @@ golem::add_css_file( "custom" )
 
 ## Add internal datasets ----
 ## If you have data in your package
-usethis::use_data_raw( name = "my_dataset", open = FALSE ) 
+usethis::use_data_raw( name = "dinnR", open = FALSE ) 
 
 ## Tests ----
 ## Add one line by test you want to create
@@ -57,3 +57,9 @@ usethis::use_appveyor()
 # go to dev/03_deploy.R
 rstudioapi::navigateToFile("dev/03_deploy.R")
 
+## 1. Print the page
+## 2. Cross them off if you want
+## 3. Fix NA URL
+## 4. Fix data entries
+## 5. If you select a recipe on sidebar, change view to shopping list
+## 6. Bold Grocery Section values

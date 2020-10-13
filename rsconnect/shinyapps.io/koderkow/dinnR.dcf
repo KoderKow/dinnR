@@ -1,0 +1,12 @@
+name: dinnR
+title: dinnR
+username:
+account: koderkow
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2980076
+bundleId: 3732874
+url: https://koderkow.shinyapps.io/dinnR/
+when: 1602565429.58997
+asMultiple: FALSE
+asStatic: FALSE

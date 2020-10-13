@@ -5,6 +5,32 @@
 #' @import shiny
 #' @noRd
 app_server <- function( input, output, session ) {
-  # List the first level callModules here
-
+  r <- reactiveValues()
+  
+  observeEvent(
+    eventExpr = TRUE,
+    once = TRUE,
+    handlerExpr = {
+      r$recipes <- sort(unique(dinnR$name))
+    }
+  )
+  
+  ## Modules ----
+  
+  ## Sidebar ----
+  callModule(mod_recipe_input_server, "recipe_input_ui_sunday", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_monday", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_tuesday", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_wednesday", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_thursday", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_friday", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_saturday", r)
+  
+  
+  ## Shopping List: First Tab ----
+  callModule(mod_shopping_list_server, "shopping_list_ui_1", r)
+  
+  ## Recipe Info: Second Tab ----
+  callModule(mod_recipes_server, "recipes_ui_1", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_recipe", r)
 }

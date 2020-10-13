@@ -16,7 +16,7 @@
 golem::fill_desc(
   pkg_name = "dinnR", # The Name of the package containing the App 
   pkg_title = "What's for Dinner?", # The Title of the package containing the App 
-  pkg_description = "Summarize what ingrediants you will need for the weekto cook the food.", # The Description of the package containing the App 
+  pkg_description = "Summarize what ingredients you will need for the weekto cook the food.", # The Description of the package containing the App 
   author_first_name = "Kyle", # Your First Name
   author_last_name = "Harris", # Your Last Name
   author_email = "koderkow@gmail.com", # Your Email
