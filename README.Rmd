@@ -21,3 +21,5 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 Fun little project Lexi and I are working on :)
+
+https://koderkow.shinyapps.io/dinnR/

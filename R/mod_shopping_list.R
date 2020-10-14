@@ -33,35 +33,32 @@ mod_shopping_list_server <- function(input, output, session, r){
       r$saturday
     )
     
-    if (nrow(d) == 0) {
-      d_sum <- data.frame(
-        grocery_section = NA,
-        ingredient = NA,
-        amount = NA,
-        units = NA
+    validate(
+      need(
+        expr = nrow(d) > 0,
+        message = "Please select a recipe to begin building a shopping list."
       )
-    } else {
-      
-      d_sum <-
-        d %>% 
-        dplyr::group_by(store, grocery_section, ingredient, units) %>% 
-        dplyr::summarize(amount = sum(quantity)) %>% 
-        dplyr::select(store, ingredient, amount, units) %>% 
-        dplyr::ungroup() %>% 
-        dplyr::group_by(store, grocery_section) %>% 
-        dplyr::mutate(rn = dplyr::row_number()) %>% 
-        dplyr::ungroup() %>% 
-        dplyr::mutate(
-          gs_lead = dplyr::lead(grocery_section),
-          grocery_section = ifelse(
-            test = rn > 1,
-            yes = NA,
-            no = grocery_section
-          )
-        ) %>% 
-        dplyr::select(-gs_lead, -rn) %>% 
-        dplyr::group_by(store)
-    }
+    )
+    
+    d_sum <-
+      d %>% 
+      dplyr::group_by(store, grocery_section, ingredient, units) %>% 
+      dplyr::summarize(amount = sum(quantity)) %>% 
+      dplyr::select(store, ingredient, amount, units) %>% 
+      dplyr::ungroup() %>% 
+      dplyr::group_by(store, grocery_section) %>% 
+      dplyr::mutate(rn = dplyr::row_number()) %>% 
+      dplyr::ungroup() %>% 
+      dplyr::mutate(
+        gs_lead = dplyr::lead(grocery_section),
+        grocery_section = ifelse(
+          test = rn > 1,
+          yes = NA,
+          no = grocery_section
+        )
+      ) %>% 
+      dplyr::select(-gs_lead, -rn) %>% 
+      dplyr::group_by(store)
     
     d_sum %>% 
       gt::gt() %>% 
@@ -70,11 +67,7 @@ mod_shopping_list_server <- function(input, output, session, r){
         column_labels.background.color = "#e2e8f0",
         row.striping.background_color = "#d1dbe7",
       ) %>% 
-      gt::cols_label(grocery_section = "Grocery Section") %>% 
-      gt::fmt_missing(
-        columns = dplyr::everything(),
-        missing_text = ""
-      )
+      gt_dinnR()
   })
 }
 

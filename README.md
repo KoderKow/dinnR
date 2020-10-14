@@ -12,3 +12,5 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 <!-- badges: end -->
 
 Fun little project Lexi and I are working on :)
+
+<https://koderkow.shinyapps.io/dinnR/>

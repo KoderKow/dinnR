@@ -44,3 +44,7 @@ body > div.container-fluid > div > div.col-sm-8 > div > ul > li:nth-child(2) > a
 a {
   color: #0094C6;
 }
+
+.shiny-output-error-validation {
+  color: #655A7C;
+}

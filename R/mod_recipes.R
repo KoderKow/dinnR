@@ -27,20 +27,28 @@ mod_recipes_server <- function(input, output, session, r){
   ns <- session$ns
   
   output$url <- renderUI({
-    req(nrow(r$recipe) > 0)
     url <- unique(r$recipe$url)
-      tags$p(
-        "Recipe URL: ",
-        tags$a(
-          url,
-          href = url,
-          target = "_blank"
-          )
-        )
+    
+    validate(
+      need(
+        expr = !is.null(url),
+        message = "Please select a recipe to view."
+      )
+    )
+    
+    tags$p(
+      "Recipe URL: ",
+      tags$a(
+        url,
+        href = url,
+        target = "_blank"
+      )
+    )
   })
   
   output$table <- gt::render_gt({
     req(nrow(r$recipe) > 0)
+    
     r$recipe %>% 
       dplyr::group_by(store, grocery_section) %>% 
       dplyr::mutate(rn = dplyr::row_number()) %>% 
@@ -53,7 +61,13 @@ mod_recipes_server <- function(input, output, session, r){
           no = grocery_section
         )
       ) %>% 
-      dplyr::select(-gs_lead, -rn, -name, -url) %>% 
+      dplyr::select(
+        store,
+        grocery_section,
+        ingredient, 
+        quantity,
+        units
+      ) %>% 
       dplyr::arrange(store, grocery_section) %>% 
       dplyr::group_by(store) %>% 
       gt::gt() %>% 
@@ -62,10 +76,7 @@ mod_recipes_server <- function(input, output, session, r){
         column_labels.background.color = "#e2e8f0",
         row.striping.background_color = "#d1dbe7",
       ) %>% 
-      gt::fmt_missing(
-        columns = dplyr::everything(),
-        missing_text = ""
-      ) 
+      gt_dinnR()
   })
 }
 
