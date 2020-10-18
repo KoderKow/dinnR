@@ -48,24 +48,16 @@ mod_recipe_input_server <- function(input, output, session, r){
     eventExpr = input$recipe,
     handlerExpr = {
       if (input$recipe != "") {
-        print(input$recipe)
         r[[dow]] <- 
-          dinnR %>% 
+          dinn %>% 
           dplyr::filter(name == input$recipe) 
         
+        r$last_selected <- input$recipe
       } else {
         r[[dow]] <- NULL
       }
     }
   )
-  
-  # output$table <- gt::render_gt({
-  #   dinnR %>%
-  #     dplyr::filter(name == input$recipe) %>% 
-  #     dplyr::select(-name) %>% 
-  #     gt::gt() %>% 
-  #     gt_theme_538()
-  # })
 }
 
 ## To be copied in the UI

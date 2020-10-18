@@ -11,7 +11,11 @@ mod_recipes_ui <- function(id){
   ns <- NS(id)
   tagList(
     tags$br(),
-    mod_recipe_input_ui("recipe_input_ui_recipe"),
+    selectizeInput(
+      inputId = ns("recipe"),
+      label = NULL,
+      choices = NULL
+    ),
     tags$br(),
     uiOutput(ns("url")),
     tags$hr(),
@@ -25,6 +29,45 @@ mod_recipes_ui <- function(id){
 #' @noRd 
 mod_recipes_server <- function(input, output, session, r){
   ns <- session$ns
+  
+  observeEvent(
+    eventExpr = r$recipes,
+    handlerExpr = {
+      updateSelectizeInput(
+        session = session,
+        inputId = "recipe",
+        choices = r$recipes,
+        selected = ""
+      )
+    }
+  )
+  
+  observeEvent(
+    eventExpr = {
+      r$last_selected
+    },
+    handlerExpr = {
+      if (r$tabs == "recipes") {
+        updateSelectizeInput(
+          session = session,
+          inputId = "recipe",
+          selected = r$last_selected
+        )
+      }
+    }
+  )
+  
+  observeEvent(
+    eventExpr = {
+      input$recipe
+    },
+    handlerExpr = {
+      r$recipe <-
+        dinn %>% 
+        dplyr::filter(name == input$recipe) 
+    }
+  )
+  
   
   output$url <- renderUI({
     url <- unique(r$recipe$url)
@@ -49,6 +92,8 @@ mod_recipes_server <- function(input, output, session, r){
   output$table <- gt::render_gt({
     req(nrow(r$recipe) > 0)
     
+    if (r$show_store == TRUE) {
+    d_sum <- 
     r$recipe %>% 
       dplyr::group_by(store, grocery_section) %>% 
       dplyr::mutate(rn = dplyr::row_number()) %>% 
@@ -68,8 +113,33 @@ mod_recipes_server <- function(input, output, session, r){
         quantity,
         units
       ) %>% 
-      dplyr::arrange(store, grocery_section) %>% 
-      dplyr::group_by(store) %>% 
+      dplyr::arrange(store, grocery_section, ingredient) %>% 
+      dplyr::group_by(store)
+    
+    } else {
+      d_sum <- 
+        r$recipe %>% 
+        dplyr::group_by(grocery_section) %>% 
+        dplyr::mutate(rn = dplyr::row_number()) %>% 
+        dplyr::ungroup() %>% 
+        dplyr::mutate(
+          gs_lead = dplyr::lead(grocery_section),
+          grocery_section = ifelse(
+            test = rn > 1,
+            yes = NA,
+            no = grocery_section
+          )
+        ) %>% 
+        dplyr::select(
+          grocery_section,
+          ingredient, 
+          quantity,
+          units
+        ) %>% 
+        dplyr::arrange(grocery_section, ingredient)
+    }
+    
+    d_sum %>% 
       gt::gt() %>% 
       gt_theme_538(
         table.background.color = "#e2e8f0",

@@ -11,9 +11,18 @@ app_server <- function( input, output, session ) {
     eventExpr = TRUE,
     once = TRUE,
     handlerExpr = {
-      r$recipes <- sort(unique(dinnR$name))
+      r$recipes <- sort(unique(dinn$name))
     }
   )
+  
+  observeEvent(
+    eventExpr = input$tabs,
+    handlerExpr = {
+      r$tabs <- input$tabs
+    }
+  )
+  
+  observeEvent(input$show_store, r$show_store <- input$show_store)
   
   ## Modules ----
   
@@ -25,7 +34,6 @@ app_server <- function( input, output, session ) {
   callModule(mod_recipe_input_server, "recipe_input_ui_thursday", r)
   callModule(mod_recipe_input_server, "recipe_input_ui_friday", r)
   callModule(mod_recipe_input_server, "recipe_input_ui_saturday", r)
-  
   
   ## Shopping List: First Tab ----
   callModule(mod_shopping_list_server, "shopping_list_ui_1", r)

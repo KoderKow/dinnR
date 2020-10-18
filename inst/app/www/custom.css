@@ -37,7 +37,7 @@ body > div.container-fluid > div > div.col-sm-8 > div > ul > li.active > a {
   border-bottom: 1px solid #655A7C;
 }
 
-body > div.container-fluid > div > div.col-sm-8 > div > ul > li:nth-child(2) > a:hover {
+body > div.container-fluid > div > div.col-sm-8 > div > ul > li > a:hover {
   background-color: #c0cddf;
 }
 
@@ -47,4 +47,8 @@ a {
 
 .shiny-output-error-validation {
   color: #655A7C;
+}
+
+.label-warning {
+    background-color: mediumpurple;
 }

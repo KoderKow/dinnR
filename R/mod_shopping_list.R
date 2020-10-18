@@ -40,25 +40,46 @@ mod_shopping_list_server <- function(input, output, session, r){
       )
     )
     
-    d_sum <-
-      d %>% 
-      dplyr::group_by(store, grocery_section, ingredient, units) %>% 
-      dplyr::summarize(amount = sum(quantity)) %>% 
-      dplyr::select(store, ingredient, amount, units) %>% 
-      dplyr::ungroup() %>% 
-      dplyr::group_by(store, grocery_section) %>% 
-      dplyr::mutate(rn = dplyr::row_number()) %>% 
-      dplyr::ungroup() %>% 
-      dplyr::mutate(
-        gs_lead = dplyr::lead(grocery_section),
-        grocery_section = ifelse(
-          test = rn > 1,
-          yes = NA,
-          no = grocery_section
-        )
-      ) %>% 
-      dplyr::select(-gs_lead, -rn) %>% 
-      dplyr::group_by(store)
+    if (r$show_store == TRUE) {
+      d_sum <-
+        d %>% 
+        dplyr::group_by(store, grocery_section, ingredient, units) %>% 
+        dplyr::summarize(amount = sum(quantity)) %>% 
+        dplyr::select(store, ingredient, amount, units) %>% 
+        dplyr::ungroup() %>% 
+        dplyr::group_by(store, grocery_section) %>% 
+        dplyr::mutate(rn = dplyr::row_number()) %>% 
+        dplyr::ungroup() %>% 
+        dplyr::mutate(
+          gs_lead = dplyr::lead(grocery_section),
+          grocery_section = ifelse(
+            test = rn > 1,
+            yes = NA,
+            no = grocery_section
+          )
+        ) %>% 
+        dplyr::select(-gs_lead, -rn) %>% 
+        dplyr::group_by(store)
+    } else {
+      d_sum <-
+        d %>% 
+        dplyr::group_by(grocery_section, ingredient, units) %>% 
+        dplyr::summarize(amount = sum(quantity)) %>% 
+        dplyr::select(ingredient, amount, units) %>% 
+        dplyr::ungroup() %>% 
+        dplyr::group_by(grocery_section) %>% 
+        dplyr::mutate(rn = dplyr::row_number()) %>% 
+        dplyr::ungroup() %>% 
+        dplyr::mutate(
+          gs_lead = dplyr::lead(grocery_section),
+          grocery_section = ifelse(
+            test = rn > 1,
+            yes = NA,
+            no = grocery_section
+          )
+        ) %>% 
+        dplyr::select(-gs_lead, -rn)
+    }
     
     d_sum %>% 
       gt::gt() %>% 

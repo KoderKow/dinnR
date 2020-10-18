@@ -19,16 +19,33 @@ app_ui <- function(request) {
           mod_recipe_input_ui("recipe_input_ui_wednesday"),
           mod_recipe_input_ui("recipe_input_ui_thursday"),
           mod_recipe_input_ui("recipe_input_ui_friday"),
-          mod_recipe_input_ui("recipe_input_ui_saturday")
+          mod_recipe_input_ui("recipe_input_ui_saturday"),
+          tags$hr(),
+          fluidRow(
+            col_2(),
+            col_10(
+              shinyWidgets::materialSwitch(
+                inputId = "show_store",
+                label = "Show Store*", 
+                value = TRUE,
+                status = "warning"
+              ) %>%
+                bsplus::bs_embed_tooltip(title = "Shows the store to purchase the ingredients based on the store feature in the source data")
+            )
+          ),
+          bsplus::use_bs_tooltip()
         ),
         mainPanel(
           tabsetPanel(
+            id = "tabs",
             tabPanel(
               title = "Shopping List",
+              value = "shopping_list",
               mod_shopping_list_ui("shopping_list_ui_1")
             ),
             tabPanel(
               title = "Recipes",
+              value = "recipes",
               mod_recipes_ui("recipes_ui_1")
             )
           )
