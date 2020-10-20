@@ -17,5 +17,5 @@ Fun little project Lexi and I are working on :)
 
 ## Thanks To …
 
-  - Colin Faye’s [hexmake](https://connect.thinkr.fr/hexmake/) app for
+  - Colin Fay’s [hexmake](https://connect.thinkr.fr/hexmake/) app for
     easily making the hex sticker for dinnR
