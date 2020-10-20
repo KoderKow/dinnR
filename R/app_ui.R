@@ -10,7 +10,6 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here 
     fluidPage(
-      tags$head(includeHTML("inst/app/www/google_analytics.html")),
       titlePanel("What's for dinnR?"),
       sidebarLayout(
         sidebarPanel(
@@ -33,8 +32,7 @@ app_ui <- function(request) {
               ) %>%
                 bsplus::bs_embed_tooltip(title = "Shows the store to purchase the ingredients based on the store feature in the source data")
             )
-          ),
-          bsplus::use_bs_tooltip()
+          )
         ),
         mainPanel(
           tabsetPanel(
@@ -76,7 +74,9 @@ golem_add_external_resources <- function(){
     bundle_resources(
       path = app_sys('app/www'),
       app_title = 'dinnR'
-    )
+    ),
+    includeHTML("inst/app/www/google_analytics.html"),
+    bsplus::use_bs_tooltip()
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert() 
   )
