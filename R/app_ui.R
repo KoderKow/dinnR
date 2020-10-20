@@ -10,6 +10,7 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here 
     fluidPage(
+      tags$head(includeHTML("inst/app/www/google_analytics.html")),
       titlePanel("What's for dinnR?"),
       sidebarLayout(
         sidebarPanel(
