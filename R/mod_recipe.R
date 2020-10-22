@@ -41,12 +41,11 @@ mod_recipe_input_server <- function(input, output, session, r){
     }
   )
   
-  # dow <- "sunday"
-  #
-  
   observeEvent(
     eventExpr = input$recipe,
     handlerExpr = {
+      r$dow_inputs[[ns("recipe")]] <- ns("recipe")
+      
       if (input$recipe != "") {
         r[[dow]] <- 
           dinn %>% 

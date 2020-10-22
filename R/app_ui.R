@@ -22,6 +22,17 @@ app_ui <- function(request) {
           mod_recipe_input_ui("recipe_input_ui_saturday"),
           tags$hr(),
           fluidRow(
+            align = "center",
+            # actionButton("plan_for_me", "I don't feel like planning")
+            shinyWidgets::actionBttn(
+              inputId = "plan_for_me",
+              label = "Plan For Me",
+              style = "unite", 
+              color = "warning"
+            )
+          ),
+          tags$hr(),
+          fluidRow(
             col_2(),
             col_10(
               shinyWidgets::materialSwitch(
@@ -75,8 +86,10 @@ golem_add_external_resources <- function(){
       path = app_sys('app/www'),
       app_title = 'dinnR'
     ),
-    includeHTML("inst/app/www/google_analytics.html"),
-    bsplus::use_bs_tooltip()
+    golem::activate_js(),
+    bsplus::use_bs_tooltip(),
+    includeHTML(system.file("app/www/google_analytics.html", package = "dinnR"))
+    
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert() 
   )

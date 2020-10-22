@@ -6,6 +6,7 @@
 #' @noRd
 app_server <- function( input, output, session ) {
   r <- reactiveValues()
+  r$dow_inputs <- list()
   
   observeEvent(
     eventExpr = TRUE,
@@ -22,7 +23,27 @@ app_server <- function( input, output, session ) {
     }
   )
   
+  ## Show store value ----
   observeEvent(input$show_store, r$show_store <- input$show_store)
+  
+  ## Plan for me action ----
+  observeEvent(
+    eventExpr = input$plan_for_me,
+    handlerExpr = {
+      recipe_count <- length(r$recipes)
+      r$plan_for_me <- sample(r$recipes, 7, prob = rep(1 / recipe_count, recipe_count))
+        
+        lapply(
+          X = seq_along(r$plan_for_me),
+          FUN = function(x) {
+          updateSelectizeInput(
+            session = session,
+            inputId = names(r$dow_inputs)[x],
+            selected = r$plan_for_me[x]
+          )
+        })
+    }
+  )
   
   ## Modules ----
   

@@ -52,3 +52,22 @@ a {
 .label-warning {
     background-color: mediumpurple;
 }
+
+/* Plan for me button */
+.bttn-unite.bttn-warning:after {
+    background: #a284e0;
+}
+
+.bttn-unite.bttn-warning:focus, .bttn-unite.bttn-warning:hover {
+    background: mediumpurple;
+    color: #fff;
+}
+
+.bttn-unite.bttn-warning {
+    border-color: mediumpurple;
+    color: mediumpurple;
+}
+
+.bttn-unite.bttn-warning:before {
+    background: mediumpurple;
+}
