@@ -71,3 +71,7 @@ a {
 .bttn-unite.bttn-warning:before {
     background: mediumpurple;
 }
+
+.about_social {
+  margin-right: 10px;
+}

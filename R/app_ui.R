@@ -57,6 +57,11 @@ app_ui <- function(request) {
               title = "Recipes",
               value = "recipes",
               mod_recipes_ui("recipes_ui_1")
+            ),
+            tabPanel(
+              title = "About",
+              value = "about",
+              mod_about_ui("about_ui_1")
             )
           )
         )

@@ -19,3 +19,7 @@ dinn <-
   )
 
 usethis::use_data(dinn, overwrite = TRUE)
+
+last_updated <- Sys.Date()
+
+usethis::use_data(last_updated, overwrite = TRUE)

@@ -1,3 +1,7 @@
+# dinnR 0.2.0
+
+- Add *About* tab
+
 # dinnr 0.1.0
 
 - Initial release!
