@@ -11,20 +11,31 @@ mod_about_ui <- function(id){
   ns <- NS(id)
   tagList(
     tags$br(),
-    tags$h2(
-      "About",
-      tags$img(
-        src="https://raw.githubusercontent.com/koderkow/dinnr/master/inst/other/hex-dinnR.png",
-        align="right",
-        width="120"
+    tags$h2("About"),
+    tags$br(),
+    # Row 1 Start
+    tags$div(
+      style="display: grid; grid-template-columns: 2fr 1fr; grid-column-gap: 20px;",
+      # Column 1
+      tags$div(
+        tags$p(
+          style = "font-size : 15px",
+          "Hello! Thank you for checking out the dinnR app! This app was made to simplify the dinner planning process. This app helps create a weekly meal plan and generate a shopping list to show the ingredients needed for the week. All recipes included in dinnR are vegan recipes as the creators are working on being full-time vegans. If you would like to learn more about vegan diets read ",
+          tags$a(
+            "here.",
+            href = "https://www.vrg.org/nutshell/vegan.htm"
+          )
+        )
+      ),
+      # column 2
+      tags$div(
+        tags$img(
+          src="https://raw.githubusercontent.com/koderkow/dinnr/master/inst/other/hex-dinnR.png",
+          align="center",
+          width="200"
+        )
       )
-    ),
-    tags$p(
-      "Hello! Thank you for checking out the dinnR app! This app was made to simplify the dinner planning process. This app helps create a weekly meal plan and generate a shopping list to show the ingredients needed for the week. All recipes included in dinnR are vegan recipes as the creators are working on being full-time vegans. If you would like to learn more about vegan diets read ",
-      tags$a(
-        "here.",
-        href = "https://www.vrg.org/nutshell/vegan.htm"
-      )
+      # Row 1 End
     ),
     tags$br(),
     tags$br(),
@@ -35,7 +46,7 @@ mod_about_ui <- function(id){
     tags$div(
       tags$img(
         src = "www/about_us.jpg",
-        style = "float:left;width:250px;border-radius:10px;margin-right: 15px;"
+        style = "float:left;width:250px;border-radius:15px;margin-right: 15px;border:6px solid #fe7f2d"
       ),
       tags$h3("Lexi"),
       tags$p("Lexi is the project manager and lead UX designer for dinnR. She also does data entry on the delicious recipes we enjoy!"),
