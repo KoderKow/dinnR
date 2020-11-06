@@ -9,6 +9,7 @@
 #' @importFrom shiny NS tagList 
 mod_recipe_input_ui <- function(id, h4 = TRUE){
   ns <- NS(id)
+  ## The dow can be extracted from the ID, this is needed to show what day a user is selecting a recipe for
   dow <- strsplit(id, "_")[[1]][4]
   dow <- paste0(toupper(substr(dow, 1, 1)), substr(dow, 2, nchar(dow)))
   

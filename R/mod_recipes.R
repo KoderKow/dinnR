@@ -14,7 +14,8 @@ mod_recipes_ui <- function(id){
     selectizeInput(
       inputId = ns("recipe"),
       label = NULL,
-      choices = NULL
+      choices = NULL,
+      options = list(placeholder = "Select a recipe to display")
     ),
     tags$br(),
     uiOutput(ns("url")),

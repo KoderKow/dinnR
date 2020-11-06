@@ -5,23 +5,17 @@
 #' @import shiny
 #' @noRd
 app_server <- function( input, output, session ) {
-  r <- reactiveValues()
-  r$dow_inputs <- list()
+  r <- reactiveValues(dow_inputs = list())
   
+  ## On load, get reecipe names ----
   observeEvent(
     eventExpr = TRUE,
     once = TRUE,
-    handlerExpr = {
-      r$recipes <- sort(unique(dinn$name))
-    }
+    handlerExpr = r$recipes <- sort(unique(dinn$name))
   )
   
-  observeEvent(
-    eventExpr = input$tabs,
-    handlerExpr = {
-      r$tabs <- input$tabs
-    }
-  )
+  ## Store active tab ----
+  observeEvent(input$tabs, r$tabs <- input$tabs)
   
   ## Show store value ----
   observeEvent(input$show_store, r$show_store <- input$show_store)

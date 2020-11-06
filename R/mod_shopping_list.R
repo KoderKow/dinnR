@@ -11,6 +11,7 @@ mod_shopping_list_ui <- function(id){
   ns <- NS(id)
   tagList(
     tags$br(),
+    # DT::DTOutput(ns("dtable")),
     gt::gt_output(ns("table"))
   )
 }
