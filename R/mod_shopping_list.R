@@ -11,8 +11,10 @@ mod_shopping_list_ui <- function(id){
   ns <- NS(id)
   tagList(
     tags$br(),
-    # DT::DTOutput(ns("dtable")),
-    gt::gt_output(ns("table"))
+    uiOutput(ns('undoUI')),
+    tags$br(),
+    DT::DTOutput(ns("table")),
+    # gt::gt_output(ns("table"))
   )
 }
 
@@ -22,8 +24,49 @@ mod_shopping_list_ui <- function(id){
 mod_shopping_list_server <- function(input, output, session, r){
   ns <- session$ns
   
-  output$table <- gt::render_gt({
+  observeEvent(input$deletePressed, {
+    req(r$d_sum)
     
+    rowNum <- parseDeleteEvent(input$deletePressed)
+    
+    dataRow <- r$d_sum[rowNum,]
+    
+    # Put the deleted row into a data frame so we can undo
+    # Last item deleted is in position 1
+    r$deletedRows <- rbind(dataRow, r$deletedRows)
+    
+    r$deletedRowIndices <- append(
+      r$deletedRowIndices,
+      rowNum,
+      after = 0
+    )
+    
+    # Delete the row from the data frame
+    r$d_sum <- r$d_sum[-rowNum,]
+  })
+  
+  observeEvent(input$undo, {
+    req(r$d_sum)
+    
+    if(nrow(r$deletedRows) > 0) {
+      row <- r$deletedRows[1, ]
+      r$d_sum <- addRowAt(r$d_sum, row, r$deletedRowIndices[[1]])
+      
+      # Remove row
+      r$deletedRows <- r$deletedRows[-1,]
+      # Remove index
+      r$deletedRowIndices <- r$deletedRowIndices[-1]
+    }
+  })
+  
+  # Disable the undo button if we have not deleted anything
+  output$undoUI <- renderUI({
+    if(!is.null(r$deletedRows) && nrow(r$deletedRows) > 0) {
+      actionButton(ns('undo'), label = 'Undo delete', icon('undo'))
+    }
+  })
+  
+  observe({
     d <- dplyr::bind_rows(
       r$sunday,
       r$monday,
@@ -34,62 +77,53 @@ mod_shopping_list_server <- function(input, output, session, r){
       r$saturday
     )
     
-    validate(
-      need(
-        expr = nrow(d) > 0,
-        message = "Please select a recipe to begin building a shopping list."
-      )
+    table_need <- need(
+      expr = nrow(d) > 0,
+      message = "Please select a recipe to begin building a shopping list."
     )
     
-    if (r$show_store == TRUE) {
-      d_sum <-
-        d %>% 
-        dplyr::group_by(store, grocery_section, ingredient, units) %>% 
-        dplyr::summarize(amount = sum(quantity)) %>% 
-        dplyr::select(store, ingredient, amount, units) %>% 
-        dplyr::ungroup() %>% 
-        dplyr::group_by(store, grocery_section) %>% 
-        dplyr::mutate(rn = dplyr::row_number()) %>% 
-        dplyr::ungroup() %>% 
-        dplyr::mutate(
-          gs_lead = dplyr::lead(grocery_section),
-          grocery_section = ifelse(
-            test = rn > 1,
-            yes = NA,
-            no = grocery_section
-          )
-        ) %>% 
-        dplyr::select(-gs_lead, -rn) %>% 
-        dplyr::group_by(store)
-    } else {
-      d_sum <-
-        d %>% 
-        dplyr::group_by(grocery_section, ingredient, units) %>% 
-        dplyr::summarize(amount = sum(quantity)) %>% 
-        dplyr::select(ingredient, amount, units) %>% 
-        dplyr::ungroup() %>% 
-        dplyr::group_by(grocery_section) %>% 
-        dplyr::mutate(rn = dplyr::row_number()) %>% 
-        dplyr::ungroup() %>% 
-        dplyr::mutate(
-          gs_lead = dplyr::lead(grocery_section),
-          grocery_section = ifelse(
-            test = rn > 1,
-            yes = NA,
-            no = grocery_section
-          )
-        ) %>% 
-        dplyr::select(-gs_lead, -rn)
-    }
+    validate(table_need)
     
-    d_sum %>% 
-      gt::gt() %>% 
-      gt_theme_538(
-        table.background.color = "#e2e8f0",
-        column_labels.background.color = "#e2e8f0",
-        row.striping.background_color = "#d1dbe7",
-      ) %>% 
-      gt_dinnR()
+    r$d_sum <-
+      d %>% 
+      dplyr::group_by(grocery_section, ingredient, units) %>% 
+      dplyr::summarize(amount = sum(quantity)) %>% 
+      dplyr::select(grocery_section, ingredient, amount, units)
+  })
+  
+  output$table <- DT::renderDT({
+    req(nrow(r$d_sum) > 0)
+    
+    r$d_sum %>% 
+      deleteButtonColumn(ns('delete_button'), ns) %>% 
+      DT::datatable(
+        rownames = FALSE,
+        selection = "none",
+        escape = FALSE,
+        colnames = c(
+          "Grocery Section",
+          "Ingredient",
+          "Amount",
+          "Units"
+        ),
+        ## Extensions
+        extensions = c('Buttons', 'RowGroup'),
+        options = list(
+          ## Table view only
+          dom = 'Bt',
+          buttons = c('pdf', 'print'),
+          rowGroup = list(dataSrc = 1),
+          columnDefs = list(
+            list(visible = FALSE, targets=1),
+            list(targets = 0:4, sortable = FALSE, className = 'dt-left')
+            
+          )
+        ),
+        editable = list(
+          target = "cell",
+          disable = list(columns = c(4))
+        )
+      )
   })
 }
 

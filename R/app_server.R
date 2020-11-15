@@ -5,8 +5,13 @@
 #' @import shiny
 #' @noRd
 app_server <- function( input, output, session ) {
-  r <- reactiveValues(dow_inputs = list())
+  r <- reactiveValues(
+    dow_inputs = list(),
+    deletedRows = NULL,
+    deletedRowIndices = list()
+  )
   
+  r$d_sum <- reactive({NULL})
   ## On load, get reecipe names ----
   observeEvent(
     eventExpr = TRUE,
