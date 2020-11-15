@@ -30,19 +30,6 @@ app_ui <- function(request) {
               style = "unite", 
               color = "warning"
             )
-          ),
-          tags$hr(),
-          fluidRow(
-            col_2(),
-            col_10(
-              shinyWidgets::materialSwitch(
-                inputId = "show_store",
-                label = "Show Store*", 
-                value = TRUE,
-                status = "warning"
-              ) %>%
-                bsplus::bs_embed_tooltip(title = "Shows the store to purchase the ingredients based on the store feature in the source data")
-            )
           )
         ),
         mainPanel(

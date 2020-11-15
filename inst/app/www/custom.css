@@ -75,3 +75,30 @@ a {
 .about_social {
   margin-right: 10px;
 }
+
+/* ---- DT Table ---- */
+
+/* Headers */
+#DataTables_Table_0 > thead {
+  font-size: 16px;
+}
+
+/* Grouping Row */
+table.dataTable tr.dtrg-group td {
+  padding: 8px;
+  color: #FFFFFF;
+  background-color: #a1a6c4 !important;
+  font-size: 80%;
+  font-weight: bolder !important;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* Row Colors */
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+    background-color: #e2e8f0 !important;
+}
+
+table.dataTable tbody tr {
+    background-color: #d1dbe7 !important;
+}

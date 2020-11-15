@@ -58,36 +58,48 @@ mod_about_ui <- function(id){
         tags$h3("Lexi"),
         tags$p("Lexi is the project manager and lead UX designer for dinnR. She also does data entry on the delicious recipes we enjoy!"),
         tags$a(
+          icon("globe", class = "fa-2x"),
+          href = "https://eatgamelove.com",
+          style = "margin-right: 10px;",
+          target = "_blank"
+        ),
+        tags$a(
           icon("twitter", class = "fa-2x"),
           href = "https://twitter.com/plsgivmepizza",
-          style = "margin-right: 10px;"
+          style = "margin-right: 10px;",
+          target = "_blank"
         ),
         tags$a(
           icon("linkedin", class = "fa-2x"),
           href = "https://www.linkedin.com/in/alexismeskowski/",
-          style = "margin-right: 10px;"
+          style = "margin-right: 10px;",
+          target = "_blank"
         ),
         tags$a(
           icon("github", class = "fa-2x"),
           href = "https://github.com/AlexisMeskowski/",
-          style = "margin-right: 10px;"
+          style = "margin-right: 10px;",
+          target = "_blank"
         ),
         tags$h3("Kyle"),
         tags$p("Does the code part."),
         tags$a(
           icon("twitter", class = "fa-2x"),
           href = "https://twitter.com/koderkow",
-          style = "margin-right: 10px;"
+          style = "margin-right: 10px;",
+          target = "_blank"
         ),
         tags$a(
           icon("linkedin", class = "fa-2x"),
           href = "https://www.linkedin.com/in/kylewharris/",
-          style = "margin-right: 10px;"
+          style = "margin-right: 10px;",
+          target = "_blank"
         ),
         tags$a(
           icon("github", class = "fa-2x"),
           href = "https://github.com/KoderKow/",
-          style = "margin-right: 10px;"
+          style = "margin-right: 10px;",
+          target = "_blank"
         )
       )
       ## Row 2 End
