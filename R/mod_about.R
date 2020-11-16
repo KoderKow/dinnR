@@ -23,12 +23,14 @@ mod_about_ui <- function(id){
           "Hello! Thank you for checking out the dinnR app! This app was made to simplify the dinner planning process. This app helps create a weekly meal plan and generate a shopping list to show the ingredients needed for the week. All recipes included in dinnR are vegan recipes as the creators are working on being full-time vegans. If you would like to learn more about vegan diets read ",
           tags$a(
             "here,",
-            href = "https://www.vrg.org/nutshell/vegan.htm"
+            href = "https://www.vrg.org/nutshell/vegan.htm",
+            target = "_blank"
           ),
           "or ",
           tags$a(
             "here",
-            href = "https://en.wikipedia.org/wiki/Semi-vegetarianism"
+            href = "https://en.wikipedia.org/wiki/Semi-vegetarianism",
+            target = "_blank"
           ),
           " for a flexitarian diet."
         )
