@@ -107,11 +107,12 @@ mod_shopping_list_server <- function(input, output, session, r){
           "Units"
         ),
         ## Extensions
-        extensions = c('Buttons', 'RowGroup'),
+        extensions = c('Buttons', 'RowGroup', "Scroller"),
         options = list(
           ## Table view only
           dom = 'Bt',
           buttons = c('pdf', 'print'),
+          pageLength = 5000,
           rowGroup = list(dataSrc = 1),
           columnDefs = list(
             list(visible = FALSE, targets=1),

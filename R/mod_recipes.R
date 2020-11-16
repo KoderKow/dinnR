@@ -93,10 +93,9 @@ mod_recipes_server <- function(input, output, session, r){
   output$table <- gt::render_gt({
     req(nrow(r$recipe) > 0)
     
-    if (r$show_store == TRUE) {
     d_sum <- 
-    r$recipe %>% 
-      dplyr::group_by(store, grocery_section) %>% 
+      r$recipe %>% 
+      dplyr::group_by(grocery_section) %>% 
       dplyr::mutate(rn = dplyr::row_number()) %>% 
       dplyr::ungroup() %>% 
       dplyr::mutate(
@@ -108,37 +107,12 @@ mod_recipes_server <- function(input, output, session, r){
         )
       ) %>% 
       dplyr::select(
-        store,
         grocery_section,
         ingredient, 
         quantity,
         units
       ) %>% 
-      dplyr::arrange(store, grocery_section, ingredient) %>% 
-      dplyr::group_by(store)
-    
-    } else {
-      d_sum <- 
-        r$recipe %>% 
-        dplyr::group_by(grocery_section) %>% 
-        dplyr::mutate(rn = dplyr::row_number()) %>% 
-        dplyr::ungroup() %>% 
-        dplyr::mutate(
-          gs_lead = dplyr::lead(grocery_section),
-          grocery_section = ifelse(
-            test = rn > 1,
-            yes = NA,
-            no = grocery_section
-          )
-        ) %>% 
-        dplyr::select(
-          grocery_section,
-          ingredient, 
-          quantity,
-          units
-        ) %>% 
-        dplyr::arrange(grocery_section, ingredient)
-    }
+      dplyr::arrange(grocery_section, ingredient)
     
     d_sum %>% 
       gt::gt() %>% 

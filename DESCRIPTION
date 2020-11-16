@@ -1,32 +1,34 @@
 Package: dinnR
 Title: What's for Dinner?
 Version: 0.2.0
-Authors@R: person('Kyle', 'Harris', email = 'koderkow@gmail.com', role = c('cre', 'aut'))
-Description: Summarize what ingredients needed for the week to cook the food!
+Authors@R: 
+    person(given = "Kyle",
+           family = "Harris",
+           role = c("cre", "aut"),
+           email = "koderkow@gmail.com")
+Description: Summarize what ingredients needed for the week to
+    cook the food!
 License: MIT + file LICENSE
-Imports: 
-    config,
-    golem,
-    shiny,
-    processx,
-    attempt,
-    DT,
-    glue,
-    htmltools,
-    magrittr,
-    pkgload,
-    dplyr,
-    gt,
-    bsplus,
-    shinyWidgets
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.1
-Suggests: 
-    testthat,
-    spelling
 URL: https://github.com/KoderKow/dinnR
 BugReports: https://github.com/KoderKow/dinnR/issues
 Depends: 
     R (>= 2.10)
+Imports: 
+    bsplus,
+    config,
+    dplyr,
+    DT,
+    golem,
+    gt,
+    htmltools,
+    magrittr,
+    shiny,
+    shinyWidgets,
+    utils
+Suggests: 
+    spelling,
+    testthat
+Encoding: UTF-8
 Language: en-US
+LazyData: true
+RoxygenNote: 7.1.1

@@ -6,7 +6,8 @@
 \alias{dinnR-package}
 \title{dinnR: What's for Dinner?}
 \description{
-Summarize what ingredients needed for the week to cook the food!
+Summarize what ingredients needed for the week to
+    cook the food!
 }
 \seealso{
 Useful links:
