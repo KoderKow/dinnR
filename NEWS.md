@@ -1,3 +1,10 @@
+# dinnR 0.3.0
+
+- Update main table from {gt} to {DT}
+    - Editable & option to delete rows
+- Update about me
+- Remove Store options
+
 # dinnR 0.2.0
 
 - Add *About* tab

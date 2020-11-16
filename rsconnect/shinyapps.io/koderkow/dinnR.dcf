@@ -5,8 +5,8 @@ account: koderkow
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2980076
-bundleId: 3864260
+bundleId: 3865410
 url: https://koderkow.shinyapps.io/dinnR/
-when: 1605479243.55929
+when: 1605507497.34058
 asMultiple: FALSE
 asStatic: FALSE
