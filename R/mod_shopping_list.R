@@ -13,7 +13,11 @@ mod_shopping_list_ui <- function(id){
     tags$br(),
     uiOutput(ns('undoUI')),
     tags$br(),
-    DT::DTOutput(ns("table")),
+    fluidRow(
+      col_2(),
+      col_8(DT::DTOutput(ns("table"))),
+      col_2()
+    )
     # gt::gt_output(ns("table"))
   )
 }
