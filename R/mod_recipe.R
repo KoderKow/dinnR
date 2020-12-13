@@ -43,8 +43,8 @@ mod_recipe_input_server <- function(input, output, session, r){
       )
       
       output$title <- renderUI({
-        
-        if (!is.null(r[[dow]]) & input$recipe != "Other Plans") {
+        ## Show servings when a recipe is selected
+        if (!input$recipe %in% c("", "Other Plans")) {
           div(
             class = "dow-titles",
             tags$h4(dow_title),
