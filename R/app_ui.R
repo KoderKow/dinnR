@@ -5,6 +5,8 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
+  current_version <- paste0("v", pkgload::pkg_version())
+  
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
@@ -13,23 +15,31 @@ app_ui <- function(request) {
       titlePanel("What's for dinnR?"),
       sidebarLayout(
         sidebarPanel(
-          mod_recipe_input_ui("recipe_input_ui_sunday"),
           mod_recipe_input_ui("recipe_input_ui_monday"),
           mod_recipe_input_ui("recipe_input_ui_tuesday"),
           mod_recipe_input_ui("recipe_input_ui_wednesday"),
           mod_recipe_input_ui("recipe_input_ui_thursday"),
           mod_recipe_input_ui("recipe_input_ui_friday"),
           mod_recipe_input_ui("recipe_input_ui_saturday"),
+          mod_recipe_input_ui("recipe_input_ui_sunday"),
           tags$hr(),
           fluidRow(
             align = "center",
-            # actionButton("plan_for_me", "I don't feel like planning")
             shinyWidgets::actionBttn(
               inputId = "plan_for_me",
               label = "Plan For Me",
               style = "unite", 
               color = "warning"
             )
+          ),
+          div(
+            id = "sidebar-footer",
+            tags$a(
+              style = "font-size: 12px;",
+              href= "https://github.com/KoderKow/dinnR",
+              target = "_blank",
+              current_version
+              )
           )
         ),
         mainPanel(

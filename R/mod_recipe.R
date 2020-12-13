@@ -14,7 +14,8 @@ mod_recipe_input_ui <- function(id, h4 = TRUE){
   dow <- paste0(toupper(substr(dow, 1, 1)), substr(dow, 2, nchar(dow)))
   
   tagList(
-    if (h4 == TRUE) h4(dow),
+    # if (h4 == TRUE) h4(dow),
+    uiOutput(ns("title")),
     selectizeInput(
       inputId = ns("recipe"),
       label = NULL,
@@ -29,6 +30,7 @@ mod_recipe_input_ui <- function(id, h4 = TRUE){
 mod_recipe_input_server <- function(input, output, session, r){
   ns <- session$ns
   dow <- strsplit(ns(""), "_|-")[[1]][[4]]
+  dow_title <- paste(toupper(substring(dow, 1,1)), substring(dow, 2), sep="")
   
   observeEvent(
     eventExpr = r$recipes,
@@ -36,9 +38,27 @@ mod_recipe_input_server <- function(input, output, session, r){
       updateSelectizeInput(
         session = session,
         inputId = "recipe",
-        choices = r$recipes,
+        choices = c("Other Plans", r$recipes),
         selected = ""
       )
+      
+      output$title <- renderUI({
+        
+        if (!is.null(r[[dow]]) & input$recipe != "Other Plans") {
+          div(
+            class = "dow-titles",
+            tags$h4(dow_title),
+            tags$p(
+              class = "dow-servings",
+              "Servings: ", unique(r[[dow]]$number_of_servings)
+              )
+          )
+        } else {
+          div(
+            tags$h4(dow_title)
+          )
+        }
+      })
     }
   )
   
@@ -47,7 +67,7 @@ mod_recipe_input_server <- function(input, output, session, r){
     handlerExpr = {
       r$dow_inputs[[ns("recipe")]] <- ns("recipe")
       
-      if (input$recipe != "") {
+      if (input$recipe != "" | input$recipe != "Other Plans") {
         r[[dow]] <- 
           dinn %>% 
           dplyr::filter(name == input$recipe) 

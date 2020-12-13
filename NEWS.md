@@ -1,3 +1,9 @@
+# dinnR 0.4.0
+
+- Serving sizes now show on sidebar and recipe tab
+- Added "Other Plans" as an option
+- Added version number of package to bottom left of sidebar
+
 # dinnR 0.3.0
 
 - Update main table from {gt} to {DT}
