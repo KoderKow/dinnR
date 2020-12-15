@@ -73,7 +73,7 @@ mod_about_ui <- function(id){
         ),
         tags$a(
           icon("twitter", class = "fa-2x"),
-          href = "https://twitter.com/plsgivmepizza",
+          href = "https://twitter.com/actualtoilet",
           style = "margin-right: 10px;",
           target = "_blank"
         ),
