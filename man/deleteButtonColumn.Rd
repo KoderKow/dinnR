@@ -4,12 +4,14 @@
 \alias{deleteButtonColumn}
 \title{A column of delete buttons for each row in the data frame for the first column}
 \usage{
-deleteButtonColumn(df, id, ns, ...)
+deleteButtonColumn(df, id, ns)
 }
 \arguments{
 \item{df}{data frame}
 
 \item{id}{id prefix to add to each actionButton. The buttons will be id'd as id_INDEX.}
+
+\item{ns}{namespace to pass to names}
 }
 \value{
 A DT::datatable with escaping turned off that has the delete buttons in the first column and \code{df} in the other

@@ -2,8 +2,9 @@
 #'
 #' @param df data frame
 #' @param id id prefix to add to each actionButton. The buttons will be id'd as id_INDEX.
+#' @param ns namespace to pass to names
 #' @return A DT::datatable with escaping turned off that has the delete buttons in the first column and \code{df} in the other
-deleteButtonColumn <- function(df, id, ns, ...) {
+deleteButtonColumn <- function(df, id, ns) {
   # function to create one action button as string
   f <- function(i) {
     delete_pressed_text <- paste0(

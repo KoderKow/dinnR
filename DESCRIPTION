@@ -21,15 +21,18 @@ Imports:
     golem,
     gt,
     htmltools,
+    lubridate,
     magrittr,
     pkgload,
+    scales,
     shiny,
     shinyWidgets,
-    utils
-Suggests: 
-    spelling,
-    testthat
+    utils,
+    processx
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 RoxygenNote: 7.1.1
+Suggests: 
+    testthat,
+    spelling
