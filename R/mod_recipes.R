@@ -19,7 +19,6 @@ mod_recipes_ui <- function(id){
     ),
     tags$br(),
     uiOutput(ns("url")),
-    tags$hr(),
     tags$h4("Ingredients"),
     gt::gt_output(ns("table"))
   )
@@ -80,12 +79,19 @@ mod_recipes_server <- function(input, output, session, r){
       )
     )
     
-    tags$p(
-      "Recipe URL: ",
-      tags$a(
-        url,
-        href = url,
-        target = "_blank"
+    tagList(
+      tags$p(
+        "Recipe URL: ",
+        tags$a(
+          url,
+          href = url,
+          target = "_blank"
+        )
+      ),
+      tags$hr(),
+      tags$p(
+        class = "dow-servings",
+        "Servings: ", unique(r$recipe$number_of_servings)
       )
     )
   })

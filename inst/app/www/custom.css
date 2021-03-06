@@ -102,3 +102,22 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 table.dataTable tbody tr {
     background-color: #d1dbe7 !important;
 }
+
+/* Have text appear next to H4 
+h4 {
+  display: inline-block;
+}*/
+
+.dow-titles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dow-servings {
+  padding-top: 5px;
+}
+
+#sidebar-footer {
+  float: left;
+}
