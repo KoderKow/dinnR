@@ -12,6 +12,11 @@ app_server <- function( input, output, session ) {
   )
   
   r$d_sum <- reactive({NULL})
+  
+  output$package_version <- renderText({
+    paste0("v", golem::get_golem_version())
+  })
+  
   ## On load, get reecipe names ----
   observeEvent(
     eventExpr = TRUE,

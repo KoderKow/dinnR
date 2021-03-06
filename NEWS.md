@@ -1,3 +1,13 @@
+# dinnR 0.5.0
+
+## Feature
+
+- Add calendar dates to days of weeks
+
+## Bug Fix
+
+- Address issue with testthat tests
+
 # dinnR 0.4.0
 
 - Serving sizes now show on sidebar and recipe tab

@@ -5,7 +5,7 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  current_version <- paste0("v", pkgload::pkg_version())
+  # current_version <- paste0("v", golem::get_golem_version())
   
   tagList(
     # Leave this function for adding external resources
@@ -38,7 +38,7 @@ app_ui <- function(request) {
               style = "font-size: 12px;",
               href= "https://github.com/KoderKow/dinnR",
               target = "_blank",
-              current_version
+              textOutput("package_version")
               )
           )
         ),
