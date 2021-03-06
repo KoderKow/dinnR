@@ -1,5 +1,5 @@
 ## code to prepare `dinnR` dataset goes here
-googlesheets4::sheets_deauth()
+googlesheets4::gs4_deauth()
 
 ingredients <- googlesheets4::read_sheet(
   ss = "https://docs.google.com/spreadsheets/d/1qVV-QL7l0WXnf0kbK29qOvv_y_6lIgnm_xaWG8QxYoE/edit?usp=sharing",
