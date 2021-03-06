@@ -32,6 +32,25 @@ mod_recipe_input_server <- function(input, output, session, r){
   dow <- strsplit(ns(""), "_|-")[[1]][[4]]
   dow_title <- paste(toupper(substring(dow, 1,1)), substring(dow, 2), sep="")
   
+  ## Add a date to the days of the weeks
+  if (dow_title != "Recipe") {
+    current_date <- Sys.Date()
+    
+    calendar_date <- next_week_day(
+      starting_date = current_date,
+      week_day = as.numeric(days_of_the_week[days_of_the_week == dow_title])
+    )
+    
+    display_month <- lubridate::month(calendar_date, label = TRUE)
+    ## It would be nice to superscript the scales::ordinal part
+    display_day <- 
+      calendar_date %>% 
+      lubridate::day() %>% 
+      scales::ordinal()
+    
+    dow_title <- paste(dow_title, display_month, display_day)
+  }
+  
   observeEvent(
     eventExpr = r$recipes,
     handlerExpr = {
