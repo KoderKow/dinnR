@@ -140,12 +140,12 @@ mod_about_ui <- function(id){
         ", ",
         format(as.Date(last_updated,format="%Y-%m-%d"), format = "%Y"),
         "."
-      ),
-      "App version: ",
-      paste0(
-        golem::get_golem_version(),
-        "."
-      )
+      )#,
+      # "App version: ",
+      # paste0(
+      #   golem::get_golem_version(),
+      #   "."
+      # )
     )
   )
 }
