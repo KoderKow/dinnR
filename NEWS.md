@@ -1,3 +1,8 @@
+# dinnR 0.5.1
+
+- Normalized units in recipes to oz for now
+- Updated and cleaned data entry errors
+
 # dinnR 0.5.0
 
 ## Feature

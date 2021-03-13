@@ -17,6 +17,31 @@ dinn <-
     by = "ingredient"
   )
 
+dinn <-
+  dinn %>% 
+  dplyr::mutate(units = stringr::str_c("imp_", units)) %>%  
+  dplyr::rowwise() %>% 
+  dplyr::mutate(
+    quantity = ifelse(
+      test = units %in% measurements::conv_unit_options$volume,
+      yes = measurements::conv_unit(
+        x = quantity,
+        from = units,
+        to = "imp_oz"
+      ),
+      no = quantity
+    ),
+    quantity = plyr::round_any(quantity, 0.05)
+  ) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::mutate(
+    units = ifelse(
+      test = units %in% measurements::conv_unit_options$volume,
+      yes = "oz",
+      no = gsub("imp_", "", units)
+    )
+  )
+
 usethis::use_data(dinn, overwrite = TRUE)
 
 last_updated <- Sys.Date()
