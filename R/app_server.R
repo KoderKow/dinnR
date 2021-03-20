@@ -28,7 +28,7 @@ app_server <- function( input, output, session ) {
   observeEvent(input$tabs, r$tabs <- input$tabs)
   
   ## Show store value ----
-  observeEvent(input$show_store, r$show_store <- input$show_store)
+  observeEvent(input$radio_measurement, r$radio_measurement <- input$radio_measurement)
   
   ## Plan for me action ----
   observeEvent(

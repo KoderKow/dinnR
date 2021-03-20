@@ -1,3 +1,10 @@
+# dinnR 0.6.0
+
+- Kept measurements as Tbsp and Cups on the app
+- Added a Measurement System for Imperial and Metric
+  - Metric updates cups to grams
+- Updated the About tab to include recipe submissions along with discord and twitch info
+
 # dinnR 0.5.1
 
 - Normalized units in recipes to oz for now

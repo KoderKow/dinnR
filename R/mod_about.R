@@ -20,30 +20,41 @@ mod_about_ui <- function(id){
       tags$div(
         tags$p(
           style = "font-size : 15px",
-          "Hello! Thank you for checking out the dinnR app! This app was made to simplify the dinner planning process. This app helps create a weekly meal plan and generate a shopping list to show the ingredients needed for the week. All recipes included in dinnR are vegan recipes as the creators are working on being full-time vegans. If you would like to learn more about vegan diets read ",
+          "Hello! Thank you for checking out the dinnR app! This app was made to simplify the dinner planning process. dinnR helps to create a weekly meal plan and generate a shopping list to show the ingredients needed for the week. If you would like to add a recipe to the app, you can make a submission ",
           tags$a(
-            "here,",
-            href = "https://www.vrg.org/nutshell/vegan.htm",
+            "here. ",
+            href = "https://forms.gle/T5pHyzZrNhzDrEd37",
             target = "_blank"
           ),
-          "or ",
+          "Please be sure to include your information if you would like to be credited!"
+        ),
+        tags$br(),
+        tags$p(
+          style = "font-size : 15px",
+          "We do stream the making of this app over on our ",
           tags$a(
-            "here",
-            href = "https://en.wikipedia.org/wiki/Semi-vegetarianism",
+            "Twitch channel",
+            href = "https://twitch.tv/theeatgamelove",
             target = "_blank"
           ),
-          " for a flexitarian diet."
+          ", so come say hello and let us know if you have any comments or ideas! Join our ",
+          tags$a(
+            "discord",
+            href = "https://discord.gg/hrec3NP",
+            target = "_blank"
+          ),
+          " and talk with us in the  #dinnr-suggestions channel as well. <3",
         )
-      ),
-      # column 2
-      tags$div(
-        tags$img(
-          src = "https://raw.githubusercontent.com/koderkow/dinnr/master/inst/other/hex-dinnR.png",
-          align = "center",
-          width = "200"
-        )
+        ),
+        # column 2
+        tags$div(
+          tags$img(
+            src = "https://raw.githubusercontent.com/koderkow/dinnr/master/inst/other/hex-dinnR.png",
+            align = "center",
+            width = "200"
+          )
+        # Row 1 End
       )
-      # Row 1 End
     ),
     tags$br(),
     tags$br(),

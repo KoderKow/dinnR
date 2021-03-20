@@ -15,6 +15,16 @@ app_ui <- function(request) {
       titlePanel("What's for dinnR?"),
       sidebarLayout(
         sidebarPanel(
+          fluidRow(
+            align = "center",
+            radioButtons(
+              inputId = "radio_measurement",
+              label = "Measurement System",
+              choices = c("Imperial", "Metric"),
+              selected = "Imperial",
+              inline = TRUE
+            )
+          ),
           mod_recipe_input_ui("recipe_input_ui_monday"),
           mod_recipe_input_ui("recipe_input_ui_tuesday"),
           mod_recipe_input_ui("recipe_input_ui_wednesday"),

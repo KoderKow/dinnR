@@ -22,28 +22,24 @@ dinn <-
   dplyr::mutate(units = stringr::str_c("imp_", units)) %>%  
   dplyr::rowwise() %>% 
   dplyr::mutate(
-    quantity = ifelse(
-      test = units %in% measurements::conv_unit_options$volume,
-      yes = measurements::conv_unit(
-        x = quantity,
-        from = units,
-        to = "imp_oz"
-      ),
-      no = quantity
+    quantity = dplyr::case_when(
+      units == "imp_oz" ~ measurements::conv_unit(x = quantity, from = "imp_oz", to = "imp_cup"),
+      units == "imp_tsp" ~ measurements::conv_unit(x = quantity, from = "imp_tsp", to = "imp_tbsp"),
+      TRUE ~ quantity
     ),
     quantity = plyr::round_any(quantity, 0.05)
   ) %>% 
   dplyr::ungroup() %>% 
   dplyr::mutate(
-    units = ifelse(
-      test = units %in% measurements::conv_unit_options$volume,
-      yes = "oz",
-      no = gsub("imp_", "", units)
-    )
-  )
+    units = dplyr::case_when(
+      units == "imp_oz" ~ "imp_cup",
+      units == "imp_tsp" ~ "imp_tbsp",
+      TRUE ~ units
+    ),
+    units = gsub("imp_", "", units)
+)
 
 usethis::use_data(dinn, overwrite = TRUE)
 
 last_updated <- Sys.Date()
-
 usethis::use_data(last_updated, overwrite = TRUE)

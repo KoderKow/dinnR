@@ -90,6 +90,18 @@ mod_shopping_list_server <- function(input, output, session, r){
     
     r$d_sum <-
       d %>% 
+      dplyr::mutate(
+        quantity = ifelse(
+          test = r$radio_measurement == "Metric" & units == "cup",
+          yes = quantity * 128,
+          no = quantity
+        ),
+        units = ifelse(
+          test = r$radio_measurement == "Metric" & units == "cup",
+          yes = "g",
+          no = units
+        )
+      ) %>% 
       dplyr::group_by(grocery_section, ingredient, units) %>% 
       dplyr::summarize(amount = sum(quantity)) %>% 
       dplyr::select(grocery_section, ingredient, amount, units)
