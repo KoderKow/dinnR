@@ -1,5 +1,8 @@
 # dinnR 0.7.0
 
+- Added a submitted by to the recipe tab
+- Added more features to Google sheets for future features
+
 # dinnR 0.6.0
 
 - Kept measurements as Tbsp and Cups on the app

@@ -14,7 +14,6 @@ mod_recipe_input_ui <- function(id, h4 = TRUE){
   dow <- paste0(toupper(substr(dow, 1, 1)), substr(dow, 2, nchar(dow)))
   
   tagList(
-    # if (h4 == TRUE) h4(dow),
     uiOutput(ns("title")),
     selectizeInput(
       inputId = ns("recipe"),

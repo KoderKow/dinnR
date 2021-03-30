@@ -19,6 +19,7 @@ mod_recipes_ui <- function(id){
     ),
     tags$br(),
     uiOutput(ns("url")),
+    uiOutput(ns("submitted_by")),
     tags$h4("Ingredients"),
     gt::gt_output(ns("table"))
   )
@@ -71,6 +72,8 @@ mod_recipes_server <- function(input, output, session, r){
   
   output$url <- renderUI({
     url <- unique(r$recipe$url)
+    submitted_by_name <- unique(r$recipe$submitted_by_name)
+    submitted_by_url  <- unique(r$recipe$submitted_by_url)
     
     validate(
       need(
@@ -85,6 +88,14 @@ mod_recipes_server <- function(input, output, session, r){
         tags$a(
           url,
           href = url,
+          target = "_blank"
+        )
+      ),
+      tags$p(
+        "Submitted By: ",
+        tags$a(
+          submitted_by_name,
+          href = submitted_by_url,
           target = "_blank"
         )
       ),
