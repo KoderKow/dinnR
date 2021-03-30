@@ -1,3 +1,8 @@
+# dinnR 0.7.1
+
+- Attempt at fixing dates
+- New recipe
+
 # dinnR 0.7.0
 
 - Added a submitted by to the recipe tab

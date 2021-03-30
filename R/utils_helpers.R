@@ -9,7 +9,7 @@ next_week_day <- function(starting_date, week_day) {
   
   diff <- week_day - lubridate::wday(starting_date)
   
-  if (diff < 0 & week_day == 2) {
+  if (diff < 0 & week_day >= 2) {
     diff <- diff + 7
   } else if (diff <= 0 & week_day != 2) {
     diff <- diff + 7
