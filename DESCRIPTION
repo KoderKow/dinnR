@@ -1,13 +1,13 @@
 Package: dinnR
 Title: What's for Dinner?
-Version: 0.6.0
+Version: 0.7.0
 Authors@R: 
     person(given = "Kyle",
            family = "Harris",
            role = c("cre", "aut"),
            email = "koderkow@gmail.com")
-Description: Summarize what ingredients needed for the week to
-    cook the food!
+Description: Summarize what ingredients needed for the week to cook the
+    food!
 License: MIT + file LICENSE
 URL: https://github.com/KoderKow/dinnR
 BugReports: https://github.com/KoderKow/dinnR/issues
@@ -28,9 +28,14 @@ Imports:
     shinyWidgets,
     utils
 Suggests: 
-    rlang,
+    googlesheets4,
+    measurements,
+    plyr,
     spelling,
-    testthat
+    stringr,
+    testthat,
+    tidyr,
+    usethis
 Encoding: UTF-8
 Language: en-US
 LazyData: true

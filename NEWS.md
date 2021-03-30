@@ -1,3 +1,5 @@
+# dinnR 0.7.0
+
 # dinnR 0.6.0
 
 - Kept measurements as Tbsp and Cups on the app
