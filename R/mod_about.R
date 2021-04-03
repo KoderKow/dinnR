@@ -20,13 +20,7 @@ mod_about_ui <- function(id){
       tags$div(
         tags$p(
           style = "font-size : 15px",
-          "Hello! Thank you for checking out the dinnR app! This app was made to simplify the dinner planning process. dinnR helps to create a weekly meal plan and generate a shopping list to show the ingredients needed for the week. If you would like to add a recipe to the app, you can make a submission ",
-          tags$a(
-            "here. ",
-            href = "https://forms.gle/T5pHyzZrNhzDrEd37",
-            target = "_blank"
-          ),
-          "Please be sure to include your information if you would like to be credited!"
+          "Hello! Thank you for checking out the dinnR app! This app was made to simplify the dinner planning process. dinnR helps to create a weekly meal plan and generate a shopping list to show the ingredients needed for the week."
         ),
         tags$br(),
         tags$p(

@@ -6,9 +6,10 @@
 #' @noRd
 app_server <- function( input, output, session ) {
   r <- reactiveValues(
-    dow_inputs = list(),
-    deletedRows = NULL,
-    deletedRowIndices = list()
+    dow_inputs        = list(),
+    deletedRows       = NULL,
+    deletedRowIndices = list(),
+    radio_measurement = "Imperial"
   )
   
   r$d_sum <- reactive({NULL})
@@ -17,18 +18,23 @@ app_server <- function( input, output, session ) {
     paste0("v", golem::get_golem_version())
   })
   
-  ## On load, get reecipe names ----
+  ## On load, get reecipe names + dates for the recipe ----
   observeEvent(
     eventExpr = TRUE,
     once = TRUE,
-    handlerExpr = r$recipes <- sort(unique(dinn$name))
+    handlerExpr = {
+      r$recipes <- sort(unique(r$d$name))
+      
+      ## Dates
+      r$calendar_dates <- next_week_day(
+        starting_date = Sys.Date(),
+        week_day = 2
+      )
+    }
   )
   
   ## Store active tab ----
   observeEvent(input$tabs, r$tabs <- input$tabs)
-  
-  ## Show store value ----
-  observeEvent(input$radio_measurement, r$radio_measurement <- input$radio_measurement)
   
   ## Plan for me action ----
   observeEvent(
@@ -66,4 +72,7 @@ app_server <- function( input, output, session ) {
   ## Recipe Info: Second Tab ----
   callModule(mod_recipes_server, "recipes_ui_1", r)
   callModule(mod_recipe_input_server, "recipe_input_ui_recipe", r)
+  
+  ## Options: Third Tab ----
+  callModule(mod_options_server, "options_ui_1", r)
 }

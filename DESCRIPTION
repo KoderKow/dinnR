@@ -6,8 +6,8 @@ Authors@R:
            family = "Harris",
            role = c("cre", "aut"),
            email = "koderkow@gmail.com")
-Description: Summarize what ingredients needed for the week to cook the
-    food!
+Description: Summarize what ingredients needed for the week to
+    cook the food!
 License: MIT + file LICENSE
 URL: https://github.com/KoderKow/dinnR
 BugReports: https://github.com/KoderKow/dinnR/issues
@@ -25,6 +25,7 @@ Imports:
     magrittr,
     scales,
     shiny,
+    shinydashboard,
     shinyWidgets,
     utils
 Suggests: 

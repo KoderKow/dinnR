@@ -15,16 +15,6 @@ app_ui <- function(request) {
       titlePanel("What's for dinnR?"),
       sidebarLayout(
         sidebarPanel(
-          fluidRow(
-            align = "center",
-            radioButtons(
-              inputId = "radio_measurement",
-              label = "Measurement System",
-              choices = c("Imperial", "Metric"),
-              selected = "Imperial",
-              inline = TRUE
-            )
-          ),
           mod_recipe_input_ui("recipe_input_ui_monday"),
           mod_recipe_input_ui("recipe_input_ui_tuesday"),
           mod_recipe_input_ui("recipe_input_ui_wednesday"),
@@ -64,6 +54,16 @@ app_ui <- function(request) {
               title = "Recipes",
               value = "recipes",
               mod_recipes_ui("recipes_ui_1")
+            ),
+            tabPanel(
+              title = "Submit a Recipe",
+              value = "submit_a_recipe",
+              mod_submit_a_recipe_ui("submit_a_recipe_ui_1")
+            ),
+            tabPanel(
+              title = "Options",
+              value = "options",
+              mod_options_ui("options_ui_1")
             ),
             tabPanel(
               title = "About",

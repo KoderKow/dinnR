@@ -7,19 +7,18 @@
 next_week_day <- function(starting_date, week_day) {
   date <- as.Date(starting_date)
   
-  diff <- week_day - lubridate::wday(starting_date)
+  date_diff <- week_day - lubridate::wday(starting_date)
   
-  if (diff < 0 & week_day >= 2) {
-    diff <- diff + 7
-  } else if (diff <= 0 & week_day != 2) {
-    diff <- diff + 7
+  if (date_diff < 0 & lubridate::wday(starting_date) != 2) {
+    date_diff <- date_diff + 7
   }
   
-  if (diff == 1 & week_day == 1) {
-    diff <- diff + 7
-  }
+  starting_point <- date + date_diff
   
-  # date + diff
+  all_dates <- setNames(
+    object = starting_point + 0:6, 
+    nm = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+  )
   
-  return(date + diff)
+  return(all_dates)
 }
