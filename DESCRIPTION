@@ -32,7 +32,6 @@ Suggests:
     measurements,
     plyr,
     rlang,
-    spelling,
     stringr,
     testthat,
     tidyr,
