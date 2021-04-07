@@ -15,7 +15,7 @@ mod_options_ui <- function(id){
       col_3(
         selectInput(
           inputId = ns("radio_measurement"),
-          label = "Measurement System",
+          label = "Measurement",
           choices = c("Imperial", "Metric"),
           selected = "Imperial"
         )
@@ -28,6 +28,14 @@ mod_options_ui <- function(id){
           choices = c("None", "Vegan", "Vegetarian"),
           selected = "None"
         )
+      ),
+      col_3(
+        uiOutput(ns("starting_date_ui")) %>% 
+          tippy::with_tippy(
+            tooltip = "<span style='font-size:14px;'>Chaning the start date will reset any selected recipes!</span>",
+            placement = "right",
+            allowHTML = TRUE
+          )
       )
     )
   )
@@ -69,6 +77,32 @@ mod_options_server <- function(input, output, session, r){
         sort()
     }
   })
+  
+  ## Starting date ----
+  output$starting_date_ui <- renderUI({
+    dateInput(
+      inputId = ns("starting_date"),
+      label = "Start Date",
+      value = r$calendar_dates[1],
+      min     = Sys.Date()
+    ) 
+  })
+  
+  observeEvent(
+    eventExpr = input$starting_date, 
+    handlerExpr = {
+      date_sequence <- seq.Date(
+        from = input$starting_date,
+        length.out = 7,
+        by = "days"
+      )
+      
+      names(date_sequence) <- weekdays(date_sequence)
+      
+      r$calendar_dates <- date_sequence
+      
+      }
+    )
 }
 
 ## To be copied in the UI

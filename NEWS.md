@@ -1,3 +1,8 @@
+# dinnR 0.9.0
+
+- Added an option for selecting start date
+- Added custom disconnect screen
+
 # dinnR 0.8.0
 
 - Fixed dates! Thanks @aftonsteps!

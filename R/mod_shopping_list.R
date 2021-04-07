@@ -72,13 +72,13 @@ mod_shopping_list_server <- function(input, output, session, r){
   
   observe({
     d <- dplyr::bind_rows(
-      r$sunday,
-      r$monday,
-      r$tuesday,
-      r$wednesday,
-      r$thursday,
-      r$friday,
-      r$saturday
+      r$Sunday,
+      r$Monday,
+      r$Tuesday,
+      r$Wednesday,
+      r$Thursday,
+      r$Friday,
+      r$Saturday
     )
     
     table_need <- need(

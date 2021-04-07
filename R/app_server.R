@@ -5,6 +5,19 @@
 #' @import shiny
 #' @noRd
 app_server <- function( input, output, session ) {
+  disconnected <- sever::sever_default(
+    title = "Ope!", 
+    subtitle = "You have been disconnected", 
+    button = "Reconnect", 
+    button_class = "info"
+  )
+  
+  sever::sever(
+    html = disconnected,
+    color = "#655A7C",
+    bg_color = "#e2e8f0"
+  )
+  
   r <- reactiveValues(
     dow_inputs        = list(),
     deletedRows       = NULL,
@@ -55,13 +68,13 @@ app_server <- function( input, output, session ) {
   ## Modules ----
   
   ## Sidebar ----
-  callModule(mod_recipe_input_server, "recipe_input_ui_sunday", r)
-  callModule(mod_recipe_input_server, "recipe_input_ui_monday", r)
-  callModule(mod_recipe_input_server, "recipe_input_ui_tuesday", r)
-  callModule(mod_recipe_input_server, "recipe_input_ui_wednesday", r)
-  callModule(mod_recipe_input_server, "recipe_input_ui_thursday", r)
-  callModule(mod_recipe_input_server, "recipe_input_ui_friday", r)
-  callModule(mod_recipe_input_server, "recipe_input_ui_saturday", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_dow_1", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_dow_2", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_dow_3", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_dow_4", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_dow_5", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_dow_6", r)
+  callModule(mod_recipe_input_server, "recipe_input_ui_dow_7", r)
   
   ## Shopping List: First Tab ----
   callModule(mod_shopping_list_server, "shopping_list_ui_1", r)

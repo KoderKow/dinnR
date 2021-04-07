@@ -15,13 +15,13 @@ app_ui <- function(request) {
       titlePanel("What's for dinnR?"),
       sidebarLayout(
         sidebarPanel(
-          mod_recipe_input_ui("recipe_input_ui_monday"),
-          mod_recipe_input_ui("recipe_input_ui_tuesday"),
-          mod_recipe_input_ui("recipe_input_ui_wednesday"),
-          mod_recipe_input_ui("recipe_input_ui_thursday"),
-          mod_recipe_input_ui("recipe_input_ui_friday"),
-          mod_recipe_input_ui("recipe_input_ui_saturday"),
-          mod_recipe_input_ui("recipe_input_ui_sunday"),
+          mod_recipe_input_ui("recipe_input_ui_dow_1"),
+          mod_recipe_input_ui("recipe_input_ui_dow_2"),
+          mod_recipe_input_ui("recipe_input_ui_dow_3"),
+          mod_recipe_input_ui("recipe_input_ui_dow_4"),
+          mod_recipe_input_ui("recipe_input_ui_dow_5"),
+          mod_recipe_input_ui("recipe_input_ui_dow_6"),
+          mod_recipe_input_ui("recipe_input_ui_dow_7"),
           tags$hr(),
           fluidRow(
             align = "center",
@@ -99,7 +99,7 @@ golem_add_external_resources <- function(){
       app_title = 'dinnR'
     ),
     golem::activate_js(),
-    bsplus::use_bs_tooltip(),
+    sever::use_sever(),
     includeHTML(system.file("app/www/google_analytics.html", package = "dinnR"))
     
     # Add here other external resources

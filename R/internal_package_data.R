@@ -13,10 +13,3 @@
 #'
 #' @format A date object.
 "last_updated"
-
-#' Data: Days of the Week
-#'
-#' Vector of days of the week for date calculations.
-#'
-#' @format A factor vector.
-"days_of_the_week"

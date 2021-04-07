@@ -10,8 +10,8 @@
 mod_recipe_input_ui <- function(id, h4 = TRUE){
   ns <- NS(id)
   ## The dow can be extracted from the ID, this is needed to show what day a user is selecting a recipe for
-  dow <- strsplit(id, "_")[[1]][4]
-  dow <- paste0(toupper(substr(dow, 1, 1)), substr(dow, 2, nchar(dow)))
+  # dow <- strsplit(id, "_")[[1]][4]
+  # dow <- paste0(toupper(substr(dow, 1, 1)), substr(dow, 2, nchar(dow)))
   
   tagList(
     uiOutput(ns("title")),
@@ -28,11 +28,23 @@ mod_recipe_input_ui <- function(id, h4 = TRUE){
 #' @noRd 
 mod_recipe_input_server <- function(input, output, session, r){
   ns <- session$ns
-  dow <- strsplit(ns(""), "_|-")[[1]][[4]]
-  dow_title <- paste(toupper(substring(dow, 1,1)), substring(dow, 2), sep="")
+  rv <- reactiveValues(
+    i = as.numeric(strsplit(ns(""), "_|-")[[1]][5])
+  )
   
   observeEvent(
-    eventExpr = r$recipes,
+    eventExpr = r$calendar_dates,
+    handlerExpr = {
+      rv$calendar_date <- r$calendar_dates[rv$i]
+      rv$dow_title <- names(r$calendar_dates)[rv$i]
+    }
+  )
+  
+  observeEvent(
+    eventExpr = {
+      r$recipes
+      r$calendar_dates
+    },
     handlerExpr = {
       updateSelectizeInput(
         session = session,
@@ -41,9 +53,9 @@ mod_recipe_input_server <- function(input, output, session, r){
         selected = ""
       )
       
-      if (dow_title != "Recipe") {
+      if (!rv$dow_title %in% c(NA, "Recipe")) {
         
-        calendar_date <- r$calendar_dates[names(r$calendar_dates) == dow_title]
+        calendar_date <- r$calendar_dates[names(r$calendar_dates) == rv$dow_title]
         
         display_month <- lubridate::month(calendar_date, label = TRUE)
         ## It would be nice to superscript the scales::ordinal part
@@ -52,7 +64,7 @@ mod_recipe_input_server <- function(input, output, session, r){
           lubridate::day() %>% 
           scales::ordinal()
         
-        dow_title <- paste(dow_title, display_month, display_day)
+        rv$display_dow_title <- paste(rv$dow_title, display_month, display_day)
       }
       
       output$title <- renderUI({
@@ -60,15 +72,15 @@ mod_recipe_input_server <- function(input, output, session, r){
         if (!input$recipe %in% c("", "Other Plans")) {
           div(
             class = "dow-titles",
-            tags$h4(dow_title),
+            tags$h4(rv$display_dow_title),
             tags$p(
               class = "dow-servings",
-              "Servings: ", unique(r[[dow]]$number_of_servings)
+              "Servings: ", unique(r[[rv$dow_title]]$number_of_servings)
             )
           )
         } else {
           div(
-            tags$h4(dow_title)
+            tags$h4(rv$display_dow_title)
           )
         }
       })
@@ -79,15 +91,15 @@ mod_recipe_input_server <- function(input, output, session, r){
     eventExpr = input$recipe,
     handlerExpr = {
       r$dow_inputs[[ns("recipe")]] <- ns("recipe")
-      
-      if (input$recipe != "" | input$recipe != "Other Plans") {
-        r[[dow]] <- 
+      if (input$recipe != "" & input$recipe != "Other Plans") {
+
+        r[[rv$dow_title]] <- 
           dinn %>% 
           dplyr::filter(name == input$recipe) 
         
         r$last_selected <- input$recipe
       } else {
-        r[[dow]] <- NULL
+        r[[rv$dow_title]] <- NULL
       }
     }
   )

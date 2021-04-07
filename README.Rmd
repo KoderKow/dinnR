@@ -26,6 +26,20 @@ Hello! Thank you for checking out the dinnR app! This app was made to simplify t
 
 We do stream the making of this app over on our [Twitch channel](https://twitch.tv/theeatgamelove), so come say hello and let us know if you have any comments or ideas! Join our [discord](https://discord.gg/hrec3NP) and talk with us in the  #dinnr-suggestions channel as well. <3
 
+## Dev Notes
+
+Update the package dependencies with
+
+```{r, eval=FALSE}
+attachment::att_amend_desc(
+  extra.suggests = c(
+    "rlang",
+    attachment::att_from_rscript("data-raw/dinn.R")
+  )
+)
+```
+
+
 ## Thanks To ...
 
 - Colin Fay's [hexmake](https://connect.thinkr.fr/hexmake/) app for easily making the hex sticker for dinnR

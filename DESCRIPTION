@@ -1,6 +1,6 @@
 Package: dinnR
 Title: What's for Dinner?
-Version: 0.8.0
+Version: 0.9.0
 Authors@R: 
     c(person(given = "Kyle",
              family = "Harris",
@@ -10,15 +10,14 @@ Authors@R:
              family = "Meskowski",
              role = "aut",
              email = "alexismeskowski@gmail.com"))
-Description: Summarize what ingredients needed for the week to
-    cook the food!
+Description: Summarize what ingredients needed for the week to cook the
+    food!
 License: MIT + file LICENSE
 URL: https://github.com/KoderKow/dinnR
 BugReports: https://github.com/KoderKow/dinnR/issues
 Depends: 
     R (>= 2.10)
 Imports: 
-    bsplus,
     config,
     dplyr,
     DT,
@@ -28,8 +27,10 @@ Imports:
     lubridate,
     magrittr,
     scales,
+    sever,
     shiny,
     shinyWidgets,
+    tippy,
     utils
 Suggests: 
     googlesheets4,

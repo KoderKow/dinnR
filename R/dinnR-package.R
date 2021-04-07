@@ -8,7 +8,7 @@
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(
-    c("amount", "dinn", "grocery_section", "gs_lead", "ingredient", "name", "quantity", "rn", "store", "last_updated", "days_of_the_week")
+    c("amount", "dinn", "grocery_section", "gs_lead", "ingredient", "name", "quantity", "rn", "store", "last_updated", "vegan", "vegetarian")
   )
 }
 
