@@ -20,5 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Kyle Harris \email{koderkow@gmail.com}
 
+Authors:
+\itemize{
+  \item Alexis Meskowski \email{alexismeskowski@gmail.com}
+}
+
 }
 \keyword{internal}

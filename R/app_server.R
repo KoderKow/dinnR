@@ -26,10 +26,7 @@ app_server <- function( input, output, session ) {
       r$recipes <- sort(unique(r$d$name))
       
       ## Dates
-      r$calendar_dates <- next_week_day(
-        starting_date = Sys.Date(),
-        week_day = 2
-      )
+      r$calendar_dates <- get_planning_dates()
     }
   )
   

@@ -1,24 +1,28 @@
 #' Find the date for the wanted next week day
+#' 
+#' Thank you `@aftonsteps` for the simplified code!
 #'
 #' @param starting_date A character. Date you are starting from.
-#' @param week_day A numeric. The next week day you want the date for.
 #'
-#' @references https://stackoverflow.com/questions/32434549/how-to-find-next-particular-day
-next_week_day <- function(starting_date, week_day) {
-  date <- as.Date(starting_date)
+#' @references https://gist.github.com/aftonsteps/1aad7b0220e9ce8e895020a105ed3386
+get_planning_dates <- function(starting_date = Sys.Date()) {
+  starting_point <- as.Date(starting_date)
   
-  date_diff <- week_day - lubridate::wday(starting_date)
-  
-  if (date_diff < 0 & lubridate::wday(starting_date) != 2) {
-    date_diff <- date_diff + 7
+  if (lubridate::wday(starting_point) != 2) {
+    starting_point <- lubridate::ceiling_date(
+      x = starting_point, 
+      week_start = 1, 
+      unit = "weeks"
+    )
   }
   
-  starting_point <- date + date_diff
-  
-  all_dates <- setNames(
-    object = starting_point + 0:6, 
-    nm = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+  date_sequence <- seq.Date(
+    from = starting_point,
+    length.out = 7,
+    by = "days"
   )
   
-  return(all_dates)
+  names(date_sequence) <- weekdays(date_sequence)
+  
+  return(date_sequence)
 }

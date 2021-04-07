@@ -1,11 +1,15 @@
 Package: dinnR
 Title: What's for Dinner?
-Version: 0.7.1
+Version: 0.8.0
 Authors@R: 
-    person(given = "Kyle",
-           family = "Harris",
-           role = c("cre", "aut"),
-           email = "koderkow@gmail.com")
+    c(person(given = "Kyle",
+             family = "Harris",
+             role = c("cre", "aut"),
+             email = "koderkow@gmail.com"),
+      person(given = "Alexis",
+             family = "Meskowski",
+             role = "aut",
+             email = "alexismeskowski@gmail.com"))
 Description: Summarize what ingredients needed for the week to
     cook the food!
 License: MIT + file LICENSE
@@ -25,7 +29,6 @@ Imports:
     magrittr,
     scales,
     shiny,
-    shinydashboard,
     shinyWidgets,
     utils
 Suggests: 

@@ -1,3 +1,13 @@
+# dinnR 0.8.0
+
+- Fixed dates! Thanks @aftonsteps!
+- Added two new tabs
+  - Submit a Recipe
+    - Initial page for submitting a recipe. Lexi and I will be drafting up how we want this tab to look
+  - Options
+    - Moved measurement style to this tab
+    - Added dietary preference option
+
 # dinnR 0.7.1
 
 - Attempt at fixing dates
