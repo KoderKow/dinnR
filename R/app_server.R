@@ -5,6 +5,8 @@
 #' @import shiny
 #' @noRd
 app_server <- function( input, output, session ) {
+  ## Sever ----
+  ## For when the app times out or disconnects 
   disconnected <- sever::sever_default(
     title = "Ope!", 
     subtitle = "You have been disconnected", 
@@ -18,6 +20,7 @@ app_server <- function( input, output, session ) {
     bg_color = "#e2e8f0"
   )
   
+  ## Reactive Values ----
   r <- reactiveValues(
     dow_inputs        = list(),
     deletedRows       = NULL,
@@ -25,17 +28,20 @@ app_server <- function( input, output, session ) {
     radio_measurement = "Imperial"
   )
   
+  ## Idk why I did this :')
   r$d_sum <- reactive({NULL})
   
+  ## Package Version ----
   output$package_version <- renderText({
     paste0("v", golem::get_golem_version())
   })
   
-  ## On load, get reecipe names + dates for the recipe ----
+  ## On load, get recipe names + dates for the recipe ----
   observeEvent(
     eventExpr = TRUE,
     once = TRUE,
     handlerExpr = {
+      ## Recipes
       r$recipes <- sort(unique(r$d$name))
       
       ## Dates
@@ -46,13 +52,36 @@ app_server <- function( input, output, session ) {
   ## Store active tab ----
   observeEvent(input$tabs, r$tabs <- input$tabs)
   
+  ## Guided Tour ----
+  observeEvent(
+    eventExpr = input$guided_tour,
+    handlerExpr = {
+      guide <- cicerone::Cicerone$
+        new(
+          allow_close = FALSE, 
+          stage_background = "transparent"
+        )$
+        step(
+          el = "recipe_input_ui_dow_1-recipe_guide",
+          title = "Select a Recipe",
+          description = "These are the inputs where you get to decide what you want for dinner that night!"
+        )
+      
+      guide$init()$start()
+    }
+  )
+ 
+  
   ## Plan for me action ----
   observeEvent(
     eventExpr = input$plan_for_me,
     handlerExpr = {
+      ## Get total count of recipes
       recipe_count <- length(r$recipes)
+      ## Sample 7 recipes
       r$plan_for_me <- sample(r$recipes, 7, prob = rep(1 / recipe_count, recipe_count))
         
+      ## Update inputs with the sampled recipes
         lapply(
           X = seq_along(r$plan_for_me),
           FUN = function(x) {
@@ -65,9 +94,9 @@ app_server <- function( input, output, session ) {
     }
   )
   
-  ## Modules ----
+  ## | Modules ----
   
-  ## Sidebar ----
+  ## || Sidebar ----
   callModule(mod_recipe_input_server, "recipe_input_ui_dow_1", r)
   callModule(mod_recipe_input_server, "recipe_input_ui_dow_2", r)
   callModule(mod_recipe_input_server, "recipe_input_ui_dow_3", r)
@@ -76,13 +105,13 @@ app_server <- function( input, output, session ) {
   callModule(mod_recipe_input_server, "recipe_input_ui_dow_6", r)
   callModule(mod_recipe_input_server, "recipe_input_ui_dow_7", r)
   
-  ## Shopping List: First Tab ----
+  ## || Shopping List: First Tab ----
   callModule(mod_shopping_list_server, "shopping_list_ui_1", r)
   
-  ## Recipe Info: Second Tab ----
+  ## || Recipe Info: Second Tab ----
   callModule(mod_recipes_server, "recipes_ui_1", r)
   callModule(mod_recipe_input_server, "recipe_input_ui_recipe", r)
   
-  ## Options: Third Tab ----
+  ## || Options: Third Tab ----
   callModule(mod_options_server, "options_ui_1", r)
 }

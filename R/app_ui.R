@@ -30,6 +30,10 @@ app_ui <- function(request) {
               label = "Plan For Me",
               style = "unite", 
               color = "warning"
+            ),
+            actionButton(
+              inputId = "guided_tour",
+              label = "Guided Tour"
             )
           ),
           div(
@@ -100,6 +104,7 @@ golem_add_external_resources <- function(){
     ),
     golem::activate_js(),
     sever::use_sever(),
+    cicerone::use_cicerone(),
     includeHTML(system.file("app/www/google_analytics.html", package = "dinnR"))
     
     # Add here other external resources

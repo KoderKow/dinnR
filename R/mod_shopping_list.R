@@ -107,6 +107,11 @@ mod_shopping_list_server <- function(input, output, session, r){
       dplyr::select(grocery_section, ingredient, amount, units)
   })
   
+  w <- waiter::Waiter$new(
+    id = "table",
+    html = waiter::spin_heartbeat()
+    )
+  
   output$table <- DT::renderDT({
     req(nrow(r$d_sum) > 0)
     
