@@ -71,6 +71,7 @@ mod_shopping_list_server <- function(input, output, session, r){
   })
   
   observe({
+    
     d <- dplyr::bind_rows(
       r$Sunday,
       r$Monday,
@@ -113,7 +114,14 @@ mod_shopping_list_server <- function(input, output, session, r){
     )
   
   output$table <- DT::renderDT({
-    req(nrow(r$d_sum) > 0)
+    # req(nrow(r$d_sum) > 0)
+    
+    table_need <- need(
+      expr = nrow(r$d_sum) > 0,
+      message = "Please select a recipe to begin building a shopping list."
+    )
+    
+    validate(table_need)
     
     r$d_sum %>% 
       deleteButtonColumn(ns('delete_button'), ns) %>% 
@@ -128,17 +136,15 @@ mod_shopping_list_server <- function(input, output, session, r){
           "Units"
         ),
         ## Extensions
-        extensions = c('Buttons', 'RowGroup', "Scroller"),
+        extensions = c('RowGroup', "Scroller"),
         options = list(
           ## Table view only
           dom = 'Bt',
-          buttons = c('pdf', 'print'),
           pageLength = 5000,
           rowGroup = list(dataSrc = 1),
           columnDefs = list(
             list(visible = FALSE, targets=1),
             list(targets = 0:4, sortable = FALSE, className = 'dt-left')
-            
           )
         ),
         editable = list(

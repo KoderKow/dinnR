@@ -91,16 +91,7 @@ mod_options_server <- function(input, output, session, r){
   observeEvent(
     eventExpr = input$starting_date, 
     handlerExpr = {
-      date_sequence <- seq.Date(
-        from = input$starting_date,
-        length.out = 7,
-        by = "days"
-      )
-      
-      names(date_sequence) <- weekdays(date_sequence)
-      
-      r$calendar_dates <- date_sequence
-      
+      r$calendar_dates <- get_planning_dates(input$starting_date)
       }
     )
 }

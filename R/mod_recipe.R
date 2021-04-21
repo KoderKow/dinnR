@@ -12,7 +12,7 @@ mod_recipe_input_ui <- function(id, h4 = TRUE){
   ## The dow can be extracted from the ID, this is needed to show what day a user is selecting a recipe for
   # dow <- strsplit(id, "_")[[1]][4]
   # dow <- paste0(toupper(substr(dow, 1, 1)), substr(dow, 2, nchar(dow)))
-  cat("hi: look at me: ", print(ns("recipe_guide")), "\n")
+  golem::cat_dev("hi: look at me: ", ns("recipe_guide"), "\n")
   tagList(
     div(
       id = ns("recipe_guide"),
@@ -55,8 +55,7 @@ mod_recipe_input_server <- function(input, output, session, r){
         choices = c("Other Plans", r$recipes),
         selected = ""
       )
-      # print(ns(input$recipe))
-      
+
       if (!rv$dow_title %in% c(NA, "Recipe")) {
         
         calendar_date <- r$calendar_dates[names(r$calendar_dates) == rv$dow_title]

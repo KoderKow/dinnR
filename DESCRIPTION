@@ -18,6 +18,7 @@ BugReports: https://github.com/KoderKow/dinnR/issues
 Depends: 
     R (>= 2.10)
 Imports: 
+    cicerone,
     config,
     dplyr,
     DT,
@@ -31,16 +32,20 @@ Imports:
     shiny,
     shinyWidgets,
     tippy,
-    utils
+    utils,
+    waiter
 Suggests: 
     googlesheets4,
     measurements,
     plyr,
+    processx,
     rlang,
+    spelling,
     stringr,
-    testthat,
+    testthat (>= 3.0.0),
     tidyr,
     usethis
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true

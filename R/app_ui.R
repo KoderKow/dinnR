@@ -34,7 +34,12 @@ app_ui <- function(request) {
             actionButton(
               inputId = "guided_tour",
               label = "Guided Tour"
-            )
+            ) %>% 
+              tippy::with_tippy(
+                tooltip = "<span style='font-size:14px;'>Warning: This will remove all selected recipes and reset the starting date!</span>",
+                placement = "right",
+                allowHTML = TRUE
+              )
           ),
           div(
             id = "sidebar-footer",
@@ -43,7 +48,7 @@ app_ui <- function(request) {
               href= "https://github.com/KoderKow/dinnR",
               target = "_blank",
               textOutput("package_version")
-              )
+            )
           )
         ),
         mainPanel(
@@ -105,6 +110,7 @@ golem_add_external_resources <- function(){
     golem::activate_js(),
     sever::use_sever(),
     cicerone::use_cicerone(),
+    tippy::use_tippy(),
     includeHTML(system.file("app/www/google_analytics.html", package = "dinnR"))
     
     # Add here other external resources

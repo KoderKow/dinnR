@@ -10,7 +10,7 @@ test_that("app ui", {
 
 test_that("app server", {
   server <- app_server
-  expect_is(server, "function")
+  expect_type(server, "closure")
   # Check that formals have not been removed
   fmls <- formals(app_server)
   for (i in c("input", "output", "session")){
@@ -21,7 +21,6 @@ test_that("app server", {
 # Configure this test to fit your need
 test_that(
   "app launches",{
-    skip_if_not(interactive())
     golem::expect_running(sleep = 5)
   }
 )
