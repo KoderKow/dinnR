@@ -95,15 +95,15 @@ app_server <- function( input, output, session ) {
           el = "recipe_input_ui_dow_3-recipe_guide",
           title = "No plans",
           description = "If you have plans for take-out or other activities select no plans."
+        )$
+        step(
+          el = "shopping_list_ui_1-table",
+          title = "Shopping list",
+          description = "This is the shopping list that generates as you pick your dinner. If you know you have an ingredient, click the trashcan icon to remove it from your shopping list. After you have selected your dinner for the week and have updated your shopping list you can save or print the list (Windows: CTRL + P | Mac: CMD + P)"
         )
       
-      ## Put a random recipe as an example
-      
-      ## TO-DO make this a function where n is a param
-      ## Get total count of recipes
-      recipe_count <- length(r$recipes)
-      ## Sample 7 recipes
-      random_recipe <- sample(r$recipes, 1, prob = rep(1 / recipe_count, recipe_count))
+      ## Get a random recipe
+      random_recipe <- random_recipe(r, n = 1)
       
       updateSelectizeInput(
         session = session,
@@ -122,26 +122,65 @@ app_server <- function( input, output, session ) {
     }
   )
   
+  # observe({
+  #   ## Get the days to randomly assign
+  #   current_recipes <<- list(
+  #     r$Monday,
+  #     r$Tuesday,
+  #     r$Wednesday,
+  #     r$Thursday,
+  #     r$Friday,
+  #     r$Saturday,
+  #     r$Sunday
+  #   ) 
+  #   
+  #   days_to_assign <- current_recipes[sapply(current_recipes, is.null)] 
+  #   
+  #   print("hey")
+  #   print(days_to_assign)
+  #   print(length(days_to_assign) == 0)
+  #   
+  #   if (length(days_to_assign) == 0) {
+  #     shinyjs::disable("plan_for_me")
+  #   }
+  # })
+  
   ## Plan for me action ----
   observeEvent(
     eventExpr = input$plan_for_me,
     handlerExpr = {
-      ## Get total count of recipes
-      recipe_count <- length(r$recipes)
       ## Sample 7 recipes
-      r$plan_for_me <- sample(r$recipes, 7, prob = rep(1 / recipe_count, recipe_count))
-        
-      golem::print_dev(names(r$dow_inputs))
-      ## Update inputs with the sampled recipes
-        lapply(
-          X = seq_along(r$plan_for_me),
-          FUN = function(x) {
+      r$plan_for_me <- random_recipe(r, n = 7)
+      
+      week_days <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+      
+      ## Get the days to randomly assign
+      days_to_assign <- list(
+        r$Monday,
+        r$Tuesday,
+        r$Wednesday,
+        r$Thursday,
+        r$Friday,
+        r$Saturday,
+        r$Sunday
+      ) %>% 
+        setNames(week_days) %>% 
+        .[sapply(., is.null)] %>% 
+        names()
+      
+      ## Iterate over the days to assign and update the wanted input
+      sapply(
+        X = days_to_assign,
+        FUN = function(x) {
+          current_day <- as.numeric(factor(x, levels = week_days))
+          
           updateSelectizeInput(
             session = session,
-            inputId = names(r$dow_inputs)[x],
-            selected = r$plan_for_me[x]
+            inputId = names(r$dow_inputs)[current_day],
+            selected = r$plan_for_me[current_day]
           )
-        })
+        }
+      )
     }
   )
   

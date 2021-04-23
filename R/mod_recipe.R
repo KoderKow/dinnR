@@ -12,16 +12,13 @@ mod_recipe_input_ui <- function(id, h4 = TRUE){
   ## The dow can be extracted from the ID, this is needed to show what day a user is selecting a recipe for
   # dow <- strsplit(id, "_")[[1]][4]
   # dow <- paste0(toupper(substr(dow, 1, 1)), substr(dow, 2, nchar(dow)))
-  golem::cat_dev("hi: look at me: ", ns("recipe_guide"), "\n")
+  
   tagList(
-    div(
-      id = ns("recipe_guide"),
-      uiOutput(ns("title")),
-      selectizeInput(
-        inputId = ns("recipe"),
-        label = NULL,
-        choices = NULL
-      )
+    uiOutput(ns("title")),
+    selectizeInput(
+      inputId = ns("recipe"),
+      label = NULL,
+      choices = NULL
     )
   )
 }
@@ -40,6 +37,8 @@ mod_recipe_input_server <- function(input, output, session, r){
     handlerExpr = {
       rv$calendar_date <- r$calendar_dates[rv$i]
       rv$dow_title <- names(r$calendar_dates)[rv$i]
+      #print(rv$i)
+      #print(paste0("dow_", rv$i))
     }
   )
   
@@ -55,7 +54,7 @@ mod_recipe_input_server <- function(input, output, session, r){
         choices = c("Other Plans", r$recipes),
         selected = ""
       )
-
+      
       if (!rv$dow_title %in% c(NA, "Recipe")) {
         
         calendar_date <- r$calendar_dates[names(r$calendar_dates) == rv$dow_title]
@@ -95,7 +94,7 @@ mod_recipe_input_server <- function(input, output, session, r){
     handlerExpr = {
       r$dow_inputs[[ns("recipe")]] <- ns("recipe")
       if (input$recipe != "" & input$recipe != "Other Plans") {
-        
+
         r[[rv$dow_title]] <- 
           dinn %>% 
           dplyr::filter(name == input$recipe) 

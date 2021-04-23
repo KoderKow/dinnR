@@ -30,7 +30,7 @@ Imports:
     scales,
     sever,
     shiny,
-    shinyWidgets,
+    shinyjs,
     tippy,
     utils,
     waiter

@@ -11,11 +11,14 @@ mod_recipes_ui <- function(id){
   ns <- NS(id)
   tagList(
     tags$br(),
-    selectizeInput(
-      inputId = ns("recipe"),
-      label = NULL,
-      choices = NULL,
-      options = list(placeholder = "Select a recipe to display")
+    div(
+      id = ns("recipe_guide"),
+      selectizeInput(
+        inputId = ns("recipe"),
+        label = NULL,
+        choices = NULL,
+        options = list(placeholder = "Select a recipe to display")
+      )
     ),
     tags$br(),
     uiOutput(ns("url")),

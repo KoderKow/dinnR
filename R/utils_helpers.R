@@ -26,3 +26,13 @@ get_planning_dates <- function(starting_date = Sys.Date()) {
   
   return(date_sequence)
 }
+
+#' Retrieve Random Recipes
+#'
+#' @param r A reactive list.
+#' @param n A numeric. Number of random recipes to recieve.
+random_recipe <- function(r, n) {
+  recipe_count <- length(r$recipes)
+  ## Sample 7 recipes
+  random_recipe <- sample(r$recipes, n, prob = rep(1 / recipe_count, recipe_count))
+}

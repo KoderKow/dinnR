@@ -25,11 +25,9 @@ app_ui <- function(request) {
           tags$hr(),
           fluidRow(
             align = "center",
-            shinyWidgets::actionBttn(
+            actionButton(
               inputId = "plan_for_me",
-              label = "Plan For Me",
-              style = "unite", 
-              color = "warning"
+              label = "Plan For Me"
             ),
             actionButton(
               inputId = "guided_tour",
@@ -111,6 +109,7 @@ golem_add_external_resources <- function(){
     sever::use_sever(),
     cicerone::use_cicerone(),
     tippy::use_tippy(),
+    shinyjs::useShinyjs(),
     includeHTML(system.file("app/www/google_analytics.html", package = "dinnR"))
     
     # Add here other external resources
