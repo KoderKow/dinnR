@@ -39,7 +39,8 @@ attachment::att_amend_desc(
 )
 ```
 
-
 ## Thanks To ...
 
-- Colin Fay's [hexmake](https://connect.thinkr.fr/hexmake/) app for easily making the hex sticker for dinnR
+- Colin Fay's [hexmake](https://connect.thinkr.fr/hexmake/) app for making the hex sticker for dinnR
+- Stefan Eng's [blog post](https://stefanengineering.com/2019/07/06/delete-rows-from-shiny-dt-datatable/) for adding a column of delete icons for the ingredient list
+- ginberg's post on [RStudio Community](https://community.rstudio.com/t/get-tab-titles-from-all-tabpanels-in-a-tabsetpanel/7958) on aquiring tabPanel ID's

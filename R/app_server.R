@@ -29,6 +29,8 @@ app_server <- function( input, output, session ) {
     d_sum             = dplyr::tibble()
   )
   
+  observe({print(input$tab_ids)})
+  
   ## Idk why I did this :')
   # r$d_sum <- reactive({NULL})
   
@@ -95,12 +97,32 @@ app_server <- function( input, output, session ) {
           el = "recipe_input_ui_dow_3-recipe_guide",
           title = "No plans",
           description = "If you have plans for take-out or other activities select no plans."
-        )$
-        step(
-          el = "shopping_list_ui_1-table",
-          title = "Shopping list",
-          description = "This is the shopping list that generates as you pick your dinner. If you know you have an ingredient, click the trashcan icon to remove it from your shopping list. After you have selected your dinner for the week and have updated your shopping list you can save or print the list (Windows: CTRL + P | Mac: CMD + P)"
-        )
+        )#$
+        # step(
+        #   el = "shopping_list_ui_1-table",
+        #   title = "Shopping list",
+        #   description = "This is the shopping list that generates as you pick your dinner. If you know you have an ingredient, click the trashcan icon to remove it from your shopping list. After you have selected your dinner for the week and have updated your shopping list you can save or print the list (Windows: CTRL + P | Mac: CMD + P)"
+        # )$
+        # step(
+        #   el = input$tab_ids[2],
+        #   title = "Recipe",
+        #   description = "Theres recipes here!"
+        # )$
+        # step(
+        #   el = input$tab_ids[3],
+        #   title = "Submit a Recipe",
+        #   description = "Interested in adding recipes you enjoy to the app? This page will provide a link to a google form that will let you submit recipes that we will add to the app!"
+        # )$
+        # step(
+        #   el = input$tab_ids[4],
+        #   title = "Options",
+        #   description = "This tab has options for measurement preference (imperial/metric), dietary preference (if any), and the starting date for planning."
+        # )$
+        # step(
+        #   el = input$tab_ids[5],
+        #   title = "About",
+        #   description = "If you are interested in learning more about the app and the people behind it check out this page! :)"
+        # )
       
       ## Get a random recipe
       random_recipe <- random_recipe(r, n = 1)

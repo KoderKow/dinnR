@@ -52,10 +52,12 @@ app_ui <- function(request) {
         mainPanel(
           tabsetPanel(
             id = "tabs",
-            tabPanel(
-              title = "Shopping List",
-              value = "shopping_list",
-              mod_shopping_list_ui("shopping_list_ui_1")
+              tabPanel(
+                class = "asdasdasdasd",
+                id = "test",
+                title = "Shopping List",
+                value = "shopping_list",
+                mod_shopping_list_ui("shopping_list_ui_1")
             ),
             tabPanel(
               title = "Recipes",

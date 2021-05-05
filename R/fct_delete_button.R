@@ -13,7 +13,6 @@ deleteButtonColumn <- function(df, id, ns) {
       '\",  this.id, {priority: "event"})'
     )
     
-    # https://shiny.rstudio.com/articles/communicating-with-js.html
     as.character(actionButton(paste(ns(id), i, sep="_"), label = NULL, icon = icon('trash'), onclick = delete_pressed_text))
   }
   
