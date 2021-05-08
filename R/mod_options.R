@@ -80,10 +80,11 @@ mod_options_server <- function(input, output, session, r){
   
   ## Starting date ----
   output$starting_date_ui <- renderUI({
+    print("boop")
     dateInput(
       inputId = ns("starting_date"),
       label = "Start Date",
-      value = r$calendar_dates[1],
+      value = get_planning_dates()[1],
       min     = Sys.Date()
     ) 
   })
@@ -91,7 +92,9 @@ mod_options_server <- function(input, output, session, r){
   observeEvent(
     eventExpr = input$starting_date, 
     handlerExpr = {
-      r$calendar_dates <- get_planning_dates(input$starting_date)
+      print("beep")
+      r$calendar_dates <- get_planning_dates(input$starting_date, next_monday = FALSE)
+      print(r$calendar_dates)
       }
     )
 }

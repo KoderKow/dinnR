@@ -20,19 +20,56 @@ app_server <- function( input, output, session ) {
     bg_color = "#e2e8f0"
   )
   
+  # observe({print(input[["options_ui_1-starting_date"]])})
+  
   ## Reactive Values ----
   r <- reactiveValues(
     dow_inputs        = list(),
     deletedRows       = NULL,
     deletedRowIndices = list(),
     radio_measurement = "Imperial",
-    d_sum             = dplyr::tibble()
+    d_sum             = dplyr::tibble(),
+    date_i            = 0
   )
   
-  observe({print(input$tab_ids)})
+  ## Bookmarking ----
+  setBookmarkExclude(c("plan_for_me", "guided_tour", "tabs", "recipes_ui_1-recipe", "bookmark_btn"))
   
-  ## Idk why I did this :')
-  # r$d_sum <- reactive({NULL})
+  observeEvent(input$bookmark_btn, {
+    session$doBookmark()
+  })
+  
+  # Save extra values in state$values when we bookmark
+  onBookmark(function(state) {
+    state$values$dow_1 <- input[["recipe_input_ui_dow_1-recipe"]]
+    state$values$dow_2 <- input[["recipe_input_ui_dow_2-recipe"]]
+    state$values$dow_3 <- input[["recipe_input_ui_dow_3-recipe"]]
+    state$values$dow_4 <- input[["recipe_input_ui_dow_4-recipe"]]
+    state$values$dow_5 <- input[["recipe_input_ui_dow_5-recipe"]]
+    state$values$dow_6 <- input[["recipe_input_ui_dow_6-recipe"]]
+    state$values$dow_7 <- input[["recipe_input_ui_dow_7-recipe"]]
+    state$values$start_date <- input[["options_ui_1-starting_date"]]
+    state$values$diet <- input[["options_ui_1-dietary_preference"]]
+    state$values$measurement <- input[["options_ui_1-radio_measurement"]]
+    savedTime <- as.character(Sys.time())
+    state$values$time <- savedTime
+  })
+  
+  # Read values from state$values when we restore
+  onRestore(function(state) {
+    r$bm_dow <- list(
+      state$values$dow_1,
+      state$values$dow_2,
+      state$values$dow_3,
+      state$values$dow_4,
+      state$values$dow_5,
+      state$values$dow_6,
+      state$values$dow_7
+    )
+    r$bm_start_date <- state$values$start_date
+    r$bm_diet <- state$values$diet
+    r$bm_measurement <- state$values$measurement
+  })
   
   ## Package Version ----
   output$package_version <- renderText({
@@ -48,7 +85,11 @@ app_server <- function( input, output, session ) {
       r$recipes <- sort(unique(r$d$name))
       
       ## Dates
-      r$calendar_dates <- get_planning_dates()
+      if (is.null(r$bm_start_date)) {
+        r$calendar_dates <- get_planning_dates()
+      } else {
+        r$calendar_dates <- get_planning_dates(r$bm_start_date, next_monday = FALSE)
+      }
     }
   )
   
@@ -78,7 +119,8 @@ app_server <- function( input, output, session ) {
   observeEvent(
     eventExpr = input$guided_tour,
     handlerExpr = {
-      guide <- cicerone::Cicerone$
+      guide <-
+        cicerone::Cicerone$
         new(
           allow_close = FALSE, 
           stage_background = "transparent"
@@ -97,32 +139,43 @@ app_server <- function( input, output, session ) {
           el = "recipe_input_ui_dow_3-recipe_guide",
           title = "No plans",
           description = "If you have plans for take-out or other activities select no plans."
-        )#$
-        # step(
-        #   el = "shopping_list_ui_1-table",
-        #   title = "Shopping list",
-        #   description = "This is the shopping list that generates as you pick your dinner. If you know you have an ingredient, click the trashcan icon to remove it from your shopping list. After you have selected your dinner for the week and have updated your shopping list you can save or print the list (Windows: CTRL + P | Mac: CMD + P)"
-        # )$
-        # step(
-        #   el = input$tab_ids[2],
-        #   title = "Recipe",
-        #   description = "Theres recipes here!"
-        # )$
-        # step(
-        #   el = input$tab_ids[3],
-        #   title = "Submit a Recipe",
-        #   description = "Interested in adding recipes you enjoy to the app? This page will provide a link to a google form that will let you submit recipes that we will add to the app!"
-        # )$
-        # step(
-        #   el = input$tab_ids[4],
-        #   title = "Options",
-        #   description = "This tab has options for measurement preference (imperial/metric), dietary preference (if any), and the starting date for planning."
-        # )$
-        # step(
-        #   el = input$tab_ids[5],
-        #   title = "About",
-        #   description = "If you are interested in learning more about the app and the people behind it check out this page! :)"
-        # )
+        )$
+        step(
+          el = "shopping_list_ui_1-table",
+          title = "Shopping list",
+          description = "This is the shopping list that generates as you pick your dinner. If you know you have an ingredient, click the trashcan icon to remove it from your shopping list. After you have selected your dinner for the week and have updated your shopping list you can save or print the list (Windows: CTRL + P | Mac: CMD + P)",
+          position = "left"
+        )$
+        step(
+          el = input$tab_ids[2],
+          title = "Recipe",
+          description = "Theres recipes here!"
+        )$
+        step(
+          el = input$tab_ids[3],
+          title = "Submit a Recipe",
+          description = "Interested in adding recipes you enjoy to the app? This page will provide a link to a gooe form that will let you submit recipes that we will add to the app!"
+        )$
+        step(
+          el = input$tab_ids[4],
+          title = "Options",
+          description = "This tab has options for measurement preference (imperial/metric), dietary preferen (if any), and the starting date for planning."
+        )$
+        step(
+          el = input$tab_ids[5],
+          title = "About",
+          description = "If you are interested in learning more about the app and the people behind it check outhis page! :)"
+        )$
+        step(
+          el = "plan_for_me",
+          title = "Plan For Me",
+          description = "Have the app pick a recipe for you! This will fill in all empty selections with a random recipe."
+        )$
+        step(
+          el = "bookmark_btn",
+          title = "Bookmark",
+          description = "Save the state of the app"
+        )
       
       ## Get a random recipe
       random_recipe <- random_recipe(r, n = 1)

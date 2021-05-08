@@ -4,10 +4,12 @@
 \alias{get_planning_dates}
 \title{Find the date for the wanted next week day}
 \usage{
-get_planning_dates(starting_date = Sys.Date())
+get_planning_dates(starting_date = NULL, next_monday = TRUE)
 }
 \arguments{
 \item{starting_date}{A character. Date you are starting from.}
+
+\item{next_monday}{A logical. Should the vector start with the following monday?}
 }
 \description{
 Thank you `@aftonsteps` for the simplified code!

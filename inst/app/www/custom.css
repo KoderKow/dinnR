@@ -121,3 +121,10 @@ h4 {
 #sidebar-footer {
   float: left;
 }
+
+/* Size of box for the booking marking url */
+#shiny-modal > div > div > div.modal-body > textarea {
+  height: 110px !important; 
+  overflow-x: hidden;
+  overflow-y: auto;
+}

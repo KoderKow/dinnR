@@ -1,3 +1,10 @@
+# dinnR 0.10.0
+
+- Fixed starting date bugs
+- Added a guided tour
+  - The text still needs to be updated!
+- Added a bookmarking button
+
 # dinnR 0.9.0
 
 - Added an option for selecting start date

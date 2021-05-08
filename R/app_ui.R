@@ -36,10 +36,12 @@ app_ui <- function(request) {
               tippy::with_tippy(
                 tooltip = "<span style='font-size:14px;'>Warning: This will remove all selected recipes and reset the starting date!</span>",
                 placement = "right",
-                allowHTML = TRUE
-              )
+                allowHTML = TRUE,
+                theme = "light"
+              ),
+            bookmarkButton(id = "bookmark_btn")
           ),
-          div(
+          tags$div(
             id = "sidebar-footer",
             tags$a(
               style = "font-size: 12px;",
@@ -52,12 +54,10 @@ app_ui <- function(request) {
         mainPanel(
           tabsetPanel(
             id = "tabs",
-              tabPanel(
-                class = "asdasdasdasd",
-                id = "test",
-                title = "Shopping List",
-                value = "shopping_list",
-                mod_shopping_list_ui("shopping_list_ui_1")
+            tabPanel(
+              title = "Shopping List",
+              value = "shopping_list",
+              mod_shopping_list_ui("shopping_list_ui_1")
             ),
             tabPanel(
               title = "Recipes",
@@ -107,10 +107,10 @@ golem_add_external_resources <- function(){
       path = app_sys('app/www'),
       app_title = 'dinnR'
     ),
+    cicerone::use_cicerone(),
     golem::activate_js(),
     sever::use_sever(),
-    cicerone::use_cicerone(),
-    tippy::use_tippy(),
+    suppressWarnings(tippy::use_tippy()),
     shinyjs::useShinyjs(),
     includeHTML(system.file("app/www/google_analytics.html", package = "dinnR"))
     
