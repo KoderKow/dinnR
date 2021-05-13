@@ -83,6 +83,7 @@ mod_recipe_input_server <- function(input, output, session, r){
           as.integer()
         
         superscript <- dplyr::case_when(
+          display_day %in% 11:13 ~ "th",
           last_number == 1L ~ "st",
           last_number == 2L ~ "nd",
           last_number == 3L ~ "rd",
