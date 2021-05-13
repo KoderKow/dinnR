@@ -84,7 +84,7 @@ mod_shopping_list_server <- function(input, output, session, r){
     
     table_need <- need(
       expr = nrow(d) > 0,
-      message = "Please select a recipe to begin building a shopping list."
+      message = "Select a recipe to begin building a shopping list"
     )
     
     validate(table_need)
@@ -118,7 +118,7 @@ mod_shopping_list_server <- function(input, output, session, r){
     
     table_need <- need(
       expr = nrow(r$d_sum) > 0,
-      message = "Please select a recipe to begin building a shopping list."
+      message = "Select a recipe to begin building a shopping list"
     )
     
     validate(table_need)

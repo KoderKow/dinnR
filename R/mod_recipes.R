@@ -78,7 +78,7 @@ mod_recipes_server <- function(input, output, session, r){
     validate(
       need(
         expr = !is.null(url),
-        message = "Please select a recipe to view."
+        message = "Select a recipe to view"
       )
     )
     
