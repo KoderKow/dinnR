@@ -99,7 +99,7 @@ mod_recipe_input_server <- function(input, output, session, r){
         if (!input$recipe %in% c("", "Other Plans")) {
           tags$div(
             class = "dow-titles",
-            tags$h4(rv$display_dow_title),
+            tags$h5(rv$display_dow_title),
             tags$p(
               class = "dow-servings",
               "Servings: ", unique(r[[rv$dow_title]]$number_of_servings)
