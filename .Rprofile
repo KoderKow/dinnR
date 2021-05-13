@@ -1,2 +1,6 @@
 source("renv/activate.R")
-source("~/.Rprofile")
+## Run personal .Rprofile
+if (file.exists("~/.Rprofile")) {
+  source("~/.Rprofile")
+}
+
