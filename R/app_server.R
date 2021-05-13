@@ -128,33 +128,33 @@ app_server <- function( input, output, session ) {
         step(
           el = "recipe_input_ui_dow_1-recipe_guide",
           title = "Select a Recipe",
-          description = "These are the inputs where you get to plan what you want for dinner."
+          description = "This is the drop down menu where you can pick the a recipe to plan each day."
         )$
         step(
           el = "recipe_input_ui_dow_2-recipe_guide",
           title = "Selecting a Recipe",
-          description = "A table will populate with ingredients as you pla n your meals. These ingredients are what you will use for a shopping list."
+          description = "Picking a recipe will load a list of ingredients on the right. This ingredient list will become your shopping list."
         )$
         step(
           el = "recipe_input_ui_dow_3-recipe_guide",
           title = "No plans",
-          description = "If you have plans for take-out or other activities select no plans."
+          description = "If you have plans for take-out or other recipes you can select \"Other Plans\"."
         )$
         step(
           el = "shopping_list_ui_1-table",
           title = "Shopping list",
-          description = "If you know you have an ingredient at home to cook with, click the trash can icon to remove it from your shopping list. After you have selected your dinner for the week and have updated your shopping list you can save or print the list (Windows: CTRL + P | Mac: CMD + P).",
+          description = "If you know you have an ingredient at home to cook with, click the trash can icon to remove it from your shopping list. After you have selected your dinners for the week and have updated your shopping list, you can save or print the list (Windows: CTRL + P | Mac: CMD + P).",
           position = "left"
         )$
         step(
           el = input$tab_ids[2],
           title = "Recipe",
-          description = "This tab will show you information on a recipe including a link to the website to view the recipe."
+          description = "This tab shows you a link to the recipe and who has submitted it."
         )$
         step(
           el = input$tab_ids[3],
           title = "Submit a Recipe",
-          description = "Interested in adding recipes you enjoy to the app? This page will provide a link to a gooe form that will let you submit recipes that we will add to the app!"
+          description = "Interested in adding recipes you enjoy to the app? This page will provide a link to a google form that will let you submit recipes to be added!"
         )$
         step(
           el = input$tab_ids[4],
@@ -164,17 +164,17 @@ app_server <- function( input, output, session ) {
         step(
           el = input$tab_ids[5],
           title = "About",
-          description = "If you are interested in learning more about the app and the people behind it check out this page! :)"
+          description = "If you are interested in learning more about the app and the people who made it, check out this page! :)"
         )$
         step(
           el = "plan_for_me",
           title = "Plan For Me",
-          description = "Have the app pick a recipe for you! This will fill in all empty selections with a random recipe."
+          description = "Have the app pick a recipe for you! This will fill in all empty days with a random recipe."
         )$
         step(
           el = "bookmark_btn",
           title = "Bookmark",
-          description = "This will generate a URL that you can copy and paste. This link will save the recipes you have selected along with all of the options you have set. This will not any modifications you have made to the shopping list."
+          description = "This will generate a link that you can copy and paste. The link will save the recipes you have selected, along with all of the options you have set. This will not save any modifications you have made to the shopping list."
         )
       
       ## Get a random recipe
