@@ -10,8 +10,7 @@ Authors@R:
              family = "Meskowski",
              role = "aut",
              email = "alexismeskowski@gmail.com"))
-Description: Summarize what ingredients needed for the week to cook the
-    food!
+Description: Summarize what ingredients needed for the week to cook dinner.
 License: MIT + file LICENSE
 URL: https://github.com/KoderKow/dinnR
 BugReports: https://github.com/KoderKow/dinnR/issues
