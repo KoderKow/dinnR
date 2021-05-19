@@ -14,3 +14,5 @@ $run_dev.*
 ^\.github$
 inst/other/*
 \.DS_Store
+Dockerfile
+deploy\.R
