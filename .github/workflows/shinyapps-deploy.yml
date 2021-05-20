@@ -8,9 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
-      - name: Install shiny
+      - name: Install dependencies
         run: |
-          install.packages(c("rsconnect"), type = "binary")
+          install.packages(c("remotes", "rsconnect"), type = "binary")
+          remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Push to shiny.io
         run: |
