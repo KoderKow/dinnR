@@ -16,3 +16,5 @@ inst/other/*
 \.DS_Store
 Dockerfile
 deploy\.R
+^Dockerfile$
+^\.dockerignore$
