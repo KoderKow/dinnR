@@ -19,10 +19,6 @@ setAccountInfo(
 files <- list.files(recursive = TRUE)
 files <- files[!grepl("^renv", files)]
 
-# print("hi")
-# 
-# devtools::install()
-
 deployApp(
   appName = error_on_missing_name("MASTERNAME"),
   appTitle = "dinnR",

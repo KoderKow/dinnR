@@ -1,6 +1,6 @@
 Package: dinnR
 Title: What's for Dinner?
-Version: 0.10.0
+Version: 0.10.1
 Authors@R: 
     c(person(given = "Kyle",
              family = "Harris",

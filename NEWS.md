@@ -1,3 +1,7 @@
+# dinnR 0.10.1
+
+- Make min date on Date Input the day before current
+
 # dinnR 0.10.0
 
 - Fixed starting date bugs

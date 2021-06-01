@@ -20,8 +20,6 @@ app_server <- function( input, output, session ) {
     bg_color = "#e2e8f0"
   )
   
-  # observe({print(input[["options_ui_1-starting_date"]])})
-  
   ## Reactive Values ----
   r <- reactiveValues(
     dow_inputs        = list(),
@@ -196,29 +194,6 @@ app_server <- function( input, output, session ) {
       guide$init()$start()
     }
   )
-  
-  # observe({
-  #   ## Get the days to randomly assign
-  #   current_recipes <<- list(
-  #     r$Monday,
-  #     r$Tuesday,
-  #     r$Wednesday,
-  #     r$Thursday,
-  #     r$Friday,
-  #     r$Saturday,
-  #     r$Sunday
-  #   ) 
-  #   
-  #   days_to_assign <- current_recipes[sapply(current_recipes, is.null)] 
-  #   
-  #   print("hey")
-  #   print(days_to_assign)
-  #   print(length(days_to_assign) == 0)
-  #   
-  #   if (length(days_to_assign) == 0) {
-  #     shinyjs::disable("plan_for_me")
-  #   }
-  # })
   
   ## Plan for me action ----
   observeEvent(
