@@ -59,7 +59,7 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.6",
+      "Version": "1.0.7",
       "Source": "CRAN",
       "Repository": "CRAN",
       "RemoteType": "standard",
@@ -531,7 +531,7 @@
     },
     "httpuv": {
       "Package": "httpuv",
-      "Version": "1.5.5",
+      "Version": "1.6.3",
       "Source": "CRAN",
       "Repository": "CRAN",
       "RemoteType": "standard",
@@ -1013,7 +1013,7 @@
     },
     "sass": {
       "Package": "sass",
-      "Version": "0.3.1",
+      "Version": "0.4.0",
       "Source": "CRAN",
       "Repository": "CRAN",
       "RemoteType": "standard",
