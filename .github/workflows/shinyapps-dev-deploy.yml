@@ -10,8 +10,8 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install dependencies
         run: |
-          install.packages(c("renv", "rsconnect"), type = "binary")
-          renv::install()
+          install.packages(c("remotes", "rsconnect"), type = "binary")
+          remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Push to shinyapps.io
         run: |
