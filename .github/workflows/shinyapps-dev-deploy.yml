@@ -1,6 +1,6 @@
 on: [push, pull_request]
 
-name: deploy-shiny
+name: deploy-shiny-dev
 
 jobs:
   deploy-shiny:
@@ -16,5 +16,5 @@ jobs:
       - name: Push to shinyapps.io
         run: |
           rsconnect::setAccountInfo(name="${{secrets.SHINY_ACC_NAME}}", token="${{secrets.TOKEN}}", secret="${{secrets.SECRET}}")
-          rsconnect::deployApp(appName = 'dinnR')
+          rsconnect::deployApp(appName = 'dinnR-dev')
         shell: Rscript {0}
